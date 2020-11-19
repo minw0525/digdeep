@@ -1,9 +1,9 @@
 const paramsObj = {};
 const paramReg = /(\?|&)(\D|\d){1,}/;
+const dataSheet = {"ko":[],"en":[]};
 let filePath;
 let pageIdx;
 let currLang;
-let dataSheet;
 let url = window.location.href;
 
 
@@ -25,22 +25,22 @@ function checkUrl(url){
 		//check pathname
 		filePath = window.location.pathname;
 		switch (filePath) {
-			case '/digdeep/index.html':
+			case "/digdeep/":
 				pageIdx = 1;
 				break;
 
-			case '/digdeep/project':
+			case "/digdeep/project":
 				pageIdx = 2;
 				break;
 
-			case '/digdeep/credit':
+			case "/digdeep/credit":
 				pageIdx = 3;
 				break;
 
 			//default: window.location.href = "https://digdeep.works"
 		}
 		getParam();
-		(currLang !== "en") ? resolve(paramsObj) : reject(paramsObj);
+		(currLang !== "en") ? resolve(paramsObj) : reject(currLang);
 	});
 }
 
@@ -51,14 +51,59 @@ const removeLang = params => {
   console.log(url);
   console.log (currLang);
   window.location.href = url;
-  return params;
+  return currLang;
 }
 
 const keepLang = params => {
   currLang = "ko";
   console.log(url);
-  return params;
+  return currLang;
 }
+
+
+
+//get google sheet JSON data
+/*
+function getData(params){
+  return new Promise((resolve, reject)=>{
+    $.getJSON("json_sample.json",function(data) {
+      console.log(data)
+      dataSheet = data[currLang];
+      resolve(dataSheet);
+    })
+});
+}
+*/
+function getData(lang){
+	//google spreadsheet link
+	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/basic?alt=json";
+	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/basic?alt=json";
+	class individual {
+		constructor(title,name,url,description,team,personalUrl,email,query) {
+			this.title = title;
+			this.name = name;
+			this.url = url;
+			this.description = description;
+			this.team = team;
+			this.personalUrl = personalUrl;
+			this.email = email;
+			this.query = query;
+		}
+	}
+
+	function parseJSON(lang, dataUrl){
+		$.getJSON(dataUrl, function(data){
+			let entry = data.feed.entry;//구글 스프레드 시트의 모든 내용은 feed.entry에 담겨있습니다.
+			for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
+				const person = new individual(entry[i].gsx$title.$t, entry[i].gsx$name.$t, entry[i].gsx$url.$t, entry[i].gsx$description.$t, entry[i].gsx$team.$t, entry[i].gsx$personalurl.$t, entry[i].gsx$email.$t, entry[i].gsx$query.$t)
+				dataSheet[lang][i] = person
+			}
+		})
+	}
+
+	parseJSON(lang, dataKO)
+}
+
 
 
 checkUrl(url)
@@ -66,6 +111,7 @@ checkUrl(url)
       p.lang ? removeLang(p) : keepLang(p)
       }
     )
+		.catch(console.log)
 
 console.log(paramsObj);
 console.log(currLang);
