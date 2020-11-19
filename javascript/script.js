@@ -25,15 +25,15 @@ function checkUrl(url){
 		//check pathname
 		filePath = window.location.pathname;
 		switch (filePath) {
-			case '/':
+			case '/digdeep/':
 				pageIdx = 1;
 				break;
 
-			case '/project':
+			case '/digdeep/project':
 				pageIdx = 2;
 				break;
 
-			case '/credit':
+			case '/digdeep/credit':
 				pageIdx = 3;
 				break;
 
