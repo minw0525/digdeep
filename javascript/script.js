@@ -8,7 +8,7 @@ let url = window.location.href;
 
 
 function checkUrl(url){
-	const currParam = paramReg.exec(url);
+	const currParam = paramReg.exec(url)[0];
 	return new Promise((resolve, reject)=>{
 		//get querystring
 		function getParam(){
