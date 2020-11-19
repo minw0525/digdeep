@@ -25,7 +25,7 @@ function checkUrl(url){
 		//check pathname
 		filePath = window.location.pathname;
 		switch (filePath) {
-			case '/digdeep/':
+			case '/digdeep/index.html':
 				pageIdx = 1;
 				break;
 
