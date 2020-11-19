@@ -8,7 +8,7 @@ let url = window.location.href;
 
 
 function checkUrl(url){
-	const currParam = paramReg.exec(url)[0];
+	const currParam = paramReg.exec(url) ? paramReg.exec(url)[0] : null;
 	return new Promise((resolve, reject)=>{
 		//get querystring
 		function getParam(){
@@ -76,8 +76,8 @@ function getData(params){
 */
 function getData(lang){
 	//google spreadsheet link
-	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/basic?alt=json";
-	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/basic?alt=json";
+	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/basic?alt=json-in-script";
+	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/basic?alt=json-in-script";
 	class individual {
 		constructor(title,name,url,description,team,personalUrl,email,query) {
 			this.title = title;
@@ -95,7 +95,7 @@ function getData(lang){
 		$.getJSON(dataUrl, function(data){
 			let entry = data.feed.entry;//구글 스프레드 시트의 모든 내용은 feed.entry에 담겨있습니다.
 			for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
-				const person = new individual(entry[i].gsx$title.$t, entry[i].gsx$name.$t, entry[i].gsx$url.$t, entry[i].gsx$description.$t, entry[i].gsx$team.$t, entry[i].gsx$personalurl.$t, entry[i].gsx$email.$t, entry[i].gsx$query.$t)
+				const person = new individual(entry[i].gsx$title[0], entry[i].gsx$name[0], entry[i].gsx$url[0], entry[i].gsx$description[0], entry[i].gsx$team[0], entry[i].gsx$personalurl[0], entry[i].gsx$email[0], entry[i].gsx$query[0])
 				dataSheet[lang][i] = person
 			}
 		})
