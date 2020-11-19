@@ -76,8 +76,8 @@ function getData(params){
 */
 function getData(lang){
 	//google spreadsheet link
-	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/basic?alt=json-in-script";
-	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/basic?alt=json-in-script";
+	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/basic?alt=json-in-script&callback=parseJSON";
+	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/basic?alt=json-in-script&callback=parseJSON";
 	class individual {
 		constructor(title,name,url,description,team,personalUrl,email,query) {
 			this.title = title;
