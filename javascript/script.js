@@ -25,7 +25,7 @@ function checkUrl(url){
 		//check pathname
 		filePath = window.location.pathname;
 		switch (filePath) {
-			case "/digdeep/":
+			case "/digdeep/index.html":
 				pageIdx = 1;
 				break;
 
@@ -100,10 +100,12 @@ function getData(lang){
 	console.log(dataSheet);
 }
 
+// draw initial div in grid-container
+function contentDraw(){
 
+}
 
-
-
+//promise chain
 checkUrl(url)
     .then(p=>{
       p.lang ? removeLang(p) : keepLang(p)
