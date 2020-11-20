@@ -61,23 +61,11 @@ const keepLang = params => {
 }
 
 
-
 //get google sheet JSON data
-/*
-function getData(params){
-  return new Promise((resolve, reject)=>{
-    $.getJSON("json_sample.json",function(data) {
-      console.log(data)
-      dataSheet = data[currLang];
-      resolve(dataSheet);
-    })
-});
-}
-*/
 function getData(lang){
 	//google spreadsheet link
-	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/basic?alt=json-in-script&callback=parseJSON";
-	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/basic?alt=json-in-script&callback=parseJSON";
+	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/full?alt=json";
+	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/full?alt=json";
 	class individual {
 		constructor(title,name,url,description,team,personalUrl,email,query) {
 			this.title = title;
@@ -93,21 +81,23 @@ function getData(lang){
 
 	function parseData(lang, data){
 		let request = new XMLHttpRequest();
-		let targetData;
+		let entry;
 		request.open("GET", data);
 		request.onload=function(){
 				let gSheet = JSON.parse(request.responseText);
-				let entry = gShet['feed']['entry'];
+				entry = gSheet['feed']['entry'];
+				console.log(entry[0].gsx$title)
 				for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
-					const person = new individual(entry[i].gsx$title[0], entry[i].gsx$name[0], entry[i].gsx$url[0], entry[i].gsx$description[0], entry[i].gsx$team[0], entry[i].gsx$personalurl[0], entry[i].gsx$email[0], entry[i].gsx$query[0])
+					const person = new individual(entry[i].gsx$title['$t'], entry[i].gsx$name['$t'], entry[i].gsx$url['$t'], entry[i].gsx$description['$t'], entry[i].gsx$team['$t'], entry[i].gsx$personalurl['$t'], entry[i].gsx$email['$t'], entry[i].gsx$query['$t'])
 					dataSheet[lang][i] = person;
-          console.log(person);
-
 				}
 		}
+		request.send();
 	}
 
-	parseData(lang, dataKO)
+	parseData('ko', dataKO);
+	parseData('en', dataEN);
+	console.log(dataSheet);
 }
 
 
@@ -119,8 +109,8 @@ checkUrl(url)
       p.lang ? removeLang(p) : keepLang(p)
       }
     )
-		.catch(console.log)
-		.then(console.log)
+		.catch(getData)
+		.then(getData)
 
 console.log(paramsObj);
 console.log(currLang);
