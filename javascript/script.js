@@ -91,18 +91,26 @@ function getData(lang){
 		}
 	}
 
-	function parseJSON(lang, dataUrl){
-		$.getJSON(dataUrl, function(data){
-			let entry = data.feed.entry;//구글 스프레드 시트의 모든 내용은 feed.entry에 담겨있습니다.
-			for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
-				const person = new individual(entry[i].gsx$title[0], entry[i].gsx$name[0], entry[i].gsx$url[0], entry[i].gsx$description[0], entry[i].gsx$team[0], entry[i].gsx$personalurl[0], entry[i].gsx$email[0], entry[i].gsx$query[0])
-				dataSheet[lang][i] = person
-			}
-		})
+	function parseData(lang, data){
+		let request = new XMLHttpRequest();
+		let targetData;
+		request.open("GET", data);
+		request.onload=function(){
+				let gSheet = JSON.parse(request.responseText);
+				let entry = gShet['feed']['entry'];
+				for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
+					const person = new individual(entry[i].gsx$title[0], entry[i].gsx$name[0], entry[i].gsx$url[0], entry[i].gsx$description[0], entry[i].gsx$team[0], entry[i].gsx$personalurl[0], entry[i].gsx$email[0], entry[i].gsx$query[0])
+					dataSheet[lang][i] = person;
+          console.log(person);
+
+				}
+		}
 	}
 
-	parseJSON(lang, dataKO)
+	parseData(lang, dataKO)
 }
+
+
 
 
 
@@ -112,6 +120,7 @@ checkUrl(url)
       }
     )
 		.catch(console.log)
+		.then(console.log)
 
 console.log(paramsObj);
 console.log(currLang);
