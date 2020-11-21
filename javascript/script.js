@@ -102,7 +102,7 @@ function getData(){
 }
 
 // draw initial div in grid-container
-function contentDraw(data, pageIdx){
+function contentDraw(pageIdx){
 
 	return new Promise(()=>{
 		//global container
@@ -123,6 +123,7 @@ function contentDraw(data, pageIdx){
 
 		//declare drawing functions
 		function mainDraw(){
+			const data = dataSheet[currLang];
 			const about = $('<div></div>');
 			about.attr('class', 'item about');
 			const info = $('<div></div>')
