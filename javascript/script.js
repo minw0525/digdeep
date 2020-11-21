@@ -222,9 +222,9 @@ checkUrl(url)
       p.lang ? removeLang(p) : keepLang(p)
       }
     )
-		.catch(getData)
-		.then(getData)
-		.then(contentDraw)
+	.catch(getData)
+	.then(getData)
+	.then(contentDraw)
 
 console.log(paramsObj);
 console.log(currLang);
