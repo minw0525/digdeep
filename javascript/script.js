@@ -138,7 +138,7 @@ function contentDraw(pageIdx){
 			gC.append(about);
 			about.append(info);
 			info.append(title, p1, p2, last);
-			console.log(title);
+			console.log(data);
 
 
 			for(let i = 0; i<28; i++){
