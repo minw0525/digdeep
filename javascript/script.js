@@ -1,3 +1,7 @@
+//google spreadsheet link
+const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/full?alt=json";
+const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/full?alt=json";
+
 const paramsObj = {};
 const paramReg = /(\?|&)(\D|\d){1,}/;
 const dataSheet = {"ko":[],"en":[]};
@@ -5,28 +9,12 @@ let filePath;
 let pageIdx;
 let currLang;
 let url = window.location.href;
+let entry;
 
 
 function checkUrl(url){
 	const currParam = paramReg.exec(url) ? paramReg.exec(url)[0] : null;
 	return new Promise((resolve, reject)=>{
-		//check pathname
-		filePath = window.location.pathname;
-		switch (filePath) {
-			case "/digdeep/index.html":
-				pageIdx = 1;
-				break;
-
-			case "/digdeep/project":
-				pageIdx = 2;
-				break;
-
-			case "/digdeep/credit":
-				pageIdx = 3;
-				break;
-
-			//default: window.location.href = "https://digdeep.works"
-		}
 
 		//get querystring
 		function getParam(){
@@ -38,9 +26,41 @@ function checkUrl(url){
 			}
 			console.log(paramsObj);
 			currLang = paramsObj.lang;
+			return paramsObj;
 		}
-		getParam();
-		(currLang !== "en") ? resolve(paramsObj) : reject(currLang);
+
+		//check pathname
+		filePath = window.location.pathname;
+		function getFilePath(path){
+			switch (path) {
+				//case "/digdeep/index.html":
+				case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
+					pageIdx = 1;
+					console.log(pageIdx)
+					return pageIdx;
+
+				case "/digdeep/project":
+					pageIdx = 2;
+					console.log(pageIdx)
+					return pageIdx;
+
+				case "/digdeep/credit":
+					pageIdx = 3;
+					console.log(pageIdx)
+					return pageIdx;
+
+				default: //window.location.href = "https://digdeep.works"
+				console.log(pageIdx);
+
+			}
+		}
+
+		console.log(getParam());
+		console.log(getFilePath(filePath));
+		console.log(currLang);
+		console.log(pageIdx);
+
+		(currLang !== "en") ? resolve(paramsObj) : reject();
 	});
 }
 
@@ -49,68 +69,86 @@ const removeLang = params => {
   url = url.replace(langPart,"");
   currLang = "ko";
   console.log(url);
-  console.log (currLang);
+  console.log (pageIdx);
   window.location.href = url;
-  return currLang;
+  return pageIdx;
 }
 
 const keepLang = params => {
   currLang = "ko";
-  console.log(url);
-  return currLang;
+  console.log(pageIdx);
+  return pageIdx;
 }
 
 
-//get google sheet JSON data
-function getData(){
-	return new Promise((resolve,reject)=>{
-		//google spreadsheet link
-		const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/full?alt=json";
-		const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/full?alt=json";
-		class individual {
-			constructor(title,name,url,description,team,personalUrl,email,query) {
-				this.title = title;
-				this.name = name;
-				this.url = url;
-				this.description = description;
-				this.team = team;
-				this.personalUrl = personalUrl;
-				this.email = email;
-				this.role = role;
-				this.query = query;
-			}
-		}
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
-		function parseData(lang, data){
+async function initData(data, lang){
+	//get google sheet JSON data
+	function getData(data){
+		return new Promise(function(resolve, reject) {
 			let request = new XMLHttpRequest();
-			let entry;
 			request.open("GET", data);
-			request.onload=function(){
+			request.send();
+			request.onload = function() {
 					let gSheet = JSON.parse(request.responseText);
 					entry = gSheet['feed']['entry'];
-					console.log(entry[0].gsx$title)
-					for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
-						const person = new individual(entry[i].gsx$title['$t'], entry[i].gsx$name['$t'], entry[i].gsx$url['$t'], entry[i].gsx$description['$t'], entry[i].gsx$team['$t'], entry[i].gsx$personalurl['$t'], entry[i].gsx$email['$t'], entry[i].gsx$role['$t'], entry[i].gsx$query['$t'])
-						dataSheet[lang][i] = person;
-					}
+					resolve(entry);
 			}
-			request.send();
-		}
+		});
+	}
 
-		parseData('ko', dataKO);
-		parseData('en', dataEN);
-		console.log(dataSheet);
-		resolve(dataSheet);
-	})
+
+	function copyData(entry) {
+		return new Promise(function(resolve, reject) {
+			class Individual {
+				constructor(title, name, url, description, team, personalUrl, email, role, query) {
+					this.title = title;
+					this.name = name;
+					this.url = url;
+					this.description = description;
+					this.team = team;
+					this.personalUrl = personalUrl;
+					this.email = email;
+					this.role = role;
+					this.query = query;
+				}
+			}
+			for (let i in entry) { // 각 행에대해 아래 스크립트를 실행합니다.
+					const person = new Individual(entry[i].gsx$title['$t'],entry[i].gsx$name['$t'],entry[i].gsx$url['$t'],entry[i].gsx$description['$t'],entry[i].gsx$team['$t'],entry[i].gsx$personalurl['$t'],entry[i].gsx$email['$t'],entry[i].gsx$role['$t'],entry[i].gsx$query['$t'])
+					dataSheet[lang][i] = person;
+					console.log(person.title);
+			}
+			console.log('copying done')
+			console.log(dataSheet);
+			resolve(dataSheet);
+		});
+	}
+
+	 	return getData(data).then(copyData);
 }
 
+
+
+
+
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+
+
+
 // draw initial div in grid-container
-function contentDraw(pageIdx){
+function contentDraw(dataSheet){
+
 	console.log(pageIdx);
 	return new Promise((resolve, reject)=>{
 		//global container
 		const gC = $(".grid-container");
-
+		console.log(dataSheet);
 		switch (pageIdx) {
 			case 1: //page index => main
 				mainDraw(dataSheet[currLang]);
@@ -129,6 +167,7 @@ function contentDraw(pageIdx){
 
 		//main page
 		function mainDraw(data){
+			console.log(data);
 			const about = $('<div></div>');
 			about.attr('class', 'item about');
 			const info = $('<div></div>')
@@ -139,21 +178,14 @@ function contentDraw(pageIdx){
 			const p1 = $('<p></p>');
 			const p2 = $('<p></p>');
 			const last = $('<h2></h2>');
-			last.text('Dig deep.');
+			last.text('dig deep.');
 
-			gC.append(about);
-			about.append(info);
-			info.append(title, p1, p2, last);
-			console.log(data);
-
+			const jail = $('<div></div>');
+			jail.attr('class', 'item jail');
 
 			for(let i = 0; i<28; i++){
 				const item = $('<div></div>');
 				item.attr('class', `item booth diggingDiv ${data[i].query}` );
-				item.css({
-					//'background-image' : `url(\'image/diggingman.png\') center /contain no-repeat content-box`,
-					'background' : 'url(\'image/diggingman.png\') center /contain no-repeat content-box'
-				});
 
 				const video = $('<video autoplay muted loop></video>');
 				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
@@ -177,7 +209,7 @@ function contentDraw(pageIdx){
 
 				// work link
 				const workLink = $("<a></a>");
-				workLink.attr('href',`https://minw0525.000webhostapp.com/v2_member?student=${data[i].query}`);
+				workLink.attr('href',`./project?student=${data[i].query}`);
 
 				//append block tag
 				const nameBlock = $(`<div></div>`);
@@ -190,7 +222,14 @@ function contentDraw(pageIdx){
 				tagName.attr('class','name')
 				const arrow = $(`<span>→</span>`);
 
-				gC.append(item);
+				gC.append(jail);
+				jail.append(item);
+
+				gC.append(about);
+				about.append(info);
+				info.append(title, p1, p2, last);
+				console.log(data);
+
 				item.append(wrappingBlock);
 				wrappingBlock.append(thumbnail, workLink);
 				workLink.append(blockTag);
@@ -208,30 +247,110 @@ function contentDraw(pageIdx){
 				})
 			}
 
-			//make blank div
-			for(let i = 0; i<8; i++){
-				const item = $('<div></div>');
-				item.attr('class', 'item booth' );
-				gC.append(item);
-
-			}
 			return pageIdx;
 		}
-
-
-
-
-
 		//project page
 		function projectDraw(data){
+			/*
+			<div class="item worksTitle">
+      	<span class="title"></span>
+				<span class="name"></span>
+				<video src=""></video>
+      </div>
+      <div class="item worksDescription">
+      	<p class="description"></p>
+      </div>
+      <div class="item stickyWrapper">
+        <div class="stick spacer"></div>
+        <img src="" alt="" class="stick">
+        <img src="" alt="" class="stick">
+        <img src="" alt="" class="stick">
+        <img src="" alt="" class="stick">
+        <img src="" alt="" class="stick">
+        <div class="stick spacer"></div>
+      </div>
+      <div class="item worksIndex"></div>
+			*/
+			return pageIdx;
+		}
+		resolve(dataSheet);
+	})
+}
 
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+
+
+
+// fill content in grid-container
+function contentFill(dataSheet){
+
+	console.log(pageIdx);
+	return new Promise((resolve, reject)=>{
+		//global container
+		const gC = $(".grid-container");
+		console.log(dataSheet);
+		switch (pageIdx) {
+			case 1: //page index => main
+				mainFill(dataSheet[currLang]);
+				break;
+			case 2: //page index => project
+				projectFill(dataSheet[currLang]);
+				break;
+			case 3: //page index => credit
+				creditFill(dataSheet[currLang]);
+				break;
+			default: alert('wrong page!');
+		}
+
+		//declare filling functions
+		//main page
+		function mainFill(data){
+			function fillMainInfo(data){
+			  const lexicon = $('.info>p:first-of-type');
+			  const keynote = $('.info>p:last-of-type');
+			  console.log(currLang);
+			  switch (currLang){
+			    case 'ko':
+			      console.log(lexicon);
+			      lexicon.html('1. (무엇을 알아내기 위해) 깊이 파고들다<br>2. (장비 따위의) 필요한 것을 찾기 위해 노력하다.');
+			      keynote.html('2020년, 준비를 마친 인부들이 이동을 시작했다.<br>오프라인에서 온라인으로, 전신의 움직임에서 손가락의 작은 움직임으로, 땅 위에서 픽셀 위로….<br>수많은 변화 속에서 그들은 존재를 지속할 수 있는 무언가를 찾아 나섰다.각자가 속한 그리드와 픽셀 위에서, 28명의 인부들은 삽을 들고 더 깊은 아래를 향해 웹 속을 파고든다. 그 끝에 발굴해낸 새로운 가능성과 존재의 조각이 궁금하다면,')
+			      break;
+			    case 'en':
+			      console.log(keynote);
+			      lexicon.html('1. search thoroughly for information<br>2. try hard to provide the money, equipment, etc.');
+			      keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online,from full-body movement to small finger movements,from the ground to pixels above...<br>Amidst a multitude of changes,they longed to find that “something” (or quality) that will rest immortally.On top of the grid and pixels to which they correspond,Twenty-eight members hold a shovel to dig deeper into the web.If you are curious about the new possibilities and pieces unearthed,');
+			      break;
+			  }
+			}
+
+			function fillMainTagText(data){
+			  const blockTags = Array.prototype.slice.call($('.blockTag'))
+			  blockTags.map(e=>{
+			    let i = blockTags.indexOf(e);
+			    const blockContent = [data[i].name, data[i].title];
+			    e.childNodes[0].childNodes[0].textContent = blockContent[0];
+			    e.childNodes[1].textContent = blockContent[1];
+			    console.log(e)
+			  })
+			}
+			fillMainInfo(data);
+			fillMainTagText(data);
 			return pageIdx;
 		}
 
+		//project page
+		function projectFill(data){
+			return pageIdx;
+		}
 
-
-
-
+		//credit page
+		function projectFill(data){
+			return pageIdx;
+		}
 		resolve();
 	})
 }
@@ -240,15 +359,43 @@ function contentDraw(pageIdx){
 
 
 //promise chain
+console.log(url)
 checkUrl(url)
-    .then(p=>{
-      p.lang ? removeLang(p) : keepLang(p)
-      }
-    )
-		.catch(getData)
-		.then(getData)
-		.then(contentDraw)
+  .then(p=>{
+    p.lang ? removeLang(p) : keepLang(p)
+    }
+  )
+initData(dataKO,'ko')
+	.then(()=>initData(dataEN,'en'))
+	.then(contentDraw)
+	.then(contentFill)
+	.catch(console.log)
+		/*
+		.then(contentDraw(pageIdx,dataSheet))
+		.then(()=>{
+			console.log(paramsObj);
+			console.log(currLang);
+			console.log(pageIdx);
+		})*/
 
-console.log(paramsObj);
-console.log(currLang);
-console.log(pageIdx);
+//bind popstate event
+$(window).bind('popstate', function(e) {
+    let returnLocation = history.location || document.location;
+    console.log(returnLocation)
+    let href = returnLocation.search;
+    //mainRefill(href);
+		let prevState = e.state;
+		console.log(e );
+		$('body').innerHTML = prevState;
+});
+
+// a tag onclick pushstate event
+$(document).on("click", "a", function(e) {
+	e.preventDefault();
+  let href = $(this).attr("href");
+  console.log(href);
+  history.pushState(href,"", href);
+  contentDraw()
+		.then(contentFill); //spa로 만들기
+  return false;
+});
