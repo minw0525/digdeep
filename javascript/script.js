@@ -110,20 +110,19 @@ function contentDraw(pageIdx){
 
 		switch (pageIdx) {
 			case 1: //page index => main
-				mainDraw();
+				mainDraw(dataSheet[currLang]);
 				break;
 			case 2: //page index => project
-				projectDraw();
+				projectDraw(dataSheet[currLang]);
 				break;
 			case 3: //page index => credit
-				creditDraw();
+				creditDraw(dataSheet[currLang]);
 				break;
 			default: alert('wrong page!');
 		}
 
 		//declare drawing functions
-		function mainDraw(){
-			const data = dataSheet[currLang];
+		function mainDraw(data){
 			const about = $('<div></div>');
 			about.attr('class', 'item about');
 			const info = $('<div></div>')
@@ -203,7 +202,12 @@ function contentDraw(pageIdx){
 				gC.append(item);
 
 			}
-			return data;
+			return pageIdx;
+		}
+
+		//
+		function projectDraw(pageIdx){
+
 		}
 	})
 }
