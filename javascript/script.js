@@ -76,6 +76,7 @@ function getData(){
 				this.team = team;
 				this.personalUrl = personalUrl;
 				this.email = email;
+				this.role = role;
 				this.query = query;
 			}
 		}
@@ -89,7 +90,7 @@ function getData(){
 					entry = gSheet['feed']['entry'];
 					console.log(entry[0].gsx$title)
 					for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
-						const person = new individual(entry[i].gsx$title['$t'], entry[i].gsx$name['$t'], entry[i].gsx$url['$t'], entry[i].gsx$description['$t'], entry[i].gsx$team['$t'], entry[i].gsx$personalurl['$t'], entry[i].gsx$email['$t'], entry[i].gsx$query['$t'])
+						const person = new individual(entry[i].gsx$title['$t'], entry[i].gsx$name['$t'], entry[i].gsx$url['$t'], entry[i].gsx$description['$t'], entry[i].gsx$team['$t'], entry[i].gsx$personalurl['$t'], entry[i].gsx$email['$t'], entry[i].gsx$role['$t'], entry[i].gsx$query['$t'])
 						dataSheet[lang][i] = person;
 					}
 			}
@@ -105,7 +106,7 @@ function getData(){
 
 // draw initial div in grid-container
 function contentDraw(pageIdx){
-
+	console.log(pageIdx);
 	return new Promise((resolve, reject)=>{
 		//global container
 		const gC = $(".grid-container");
@@ -123,7 +124,10 @@ function contentDraw(pageIdx){
 			default: alert('wrong page!');
 		}
 
+
 		//declare drawing functions
+
+		//main page
 		function mainDraw(data){
 			const about = $('<div></div>');
 			about.attr('class', 'item about');
@@ -150,6 +154,13 @@ function contentDraw(pageIdx){
 					//'background-image' : `url(\'image/diggingman.png\') center /contain no-repeat content-box`,
 					'background' : 'url(\'image/diggingman.png\') center /contain no-repeat content-box'
 				});
+
+				const video = $('<video autoplay muted loop></video>');
+				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
+				video.attr('src',`video/thumbnail_jiu.mp4`);
+				item.append(video);
+
+
 				const wrappingBlock = $("<div></div>");
 				wrappingBlock.attr('class', 'wrappingBlock hidden');
 
@@ -207,13 +218,26 @@ function contentDraw(pageIdx){
 			return pageIdx;
 		}
 
-		//
-		function projectDraw(pageIdx){
 
+
+
+
+		//project page
+		function projectDraw(data){
+
+			return pageIdx;
 		}
+
+
+
+
+
 		resolve();
 	})
 }
+
+
+
 
 //promise chain
 checkUrl(url)
