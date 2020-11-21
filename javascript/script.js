@@ -64,44 +64,43 @@ const keepLang = params => {
 //get google sheet JSON data
 function getData(){
 	return new Promise((resolve,reject)=>{
+		//google spreadsheet link
+		const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/full?alt=json";
+		const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/full?alt=json";
+		class individual {
+			constructor(title,name,url,description,team,personalUrl,email,query) {
+				this.title = title;
+				this.name = name;
+				this.url = url;
+				this.description = description;
+				this.team = team;
+				this.personalUrl = personalUrl;
+				this.email = email;
+				this.query = query;
+			}
+		}
 
+		function parseData(lang, data){
+			let request = new XMLHttpRequest();
+			let entry;
+			request.open("GET", data);
+			request.onload=function(){
+					let gSheet = JSON.parse(request.responseText);
+					entry = gSheet['feed']['entry'];
+					console.log(entry[0].gsx$title)
+					for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
+						const person = new individual(entry[i].gsx$title['$t'], entry[i].gsx$name['$t'], entry[i].gsx$url['$t'], entry[i].gsx$description['$t'], entry[i].gsx$team['$t'], entry[i].gsx$personalurl['$t'], entry[i].gsx$email['$t'], entry[i].gsx$query['$t'])
+						dataSheet[lang][i] = person;
+					}
+			}
+			request.send();
+		}
+
+		parseData('ko', dataKO);
+		parseData('en', dataEN);
+		console.log(dataSheet);
+		resolve(dataSheet);
 	})
-	//google spreadsheet link
-	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/full?alt=json";
-	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/full?alt=json";
-	class individual {
-		constructor(title,name,url,description,team,personalUrl,email,query) {
-			this.title = title;
-			this.name = name;
-			this.url = url;
-			this.description = description;
-			this.team = team;
-			this.personalUrl = personalUrl;
-			this.email = email;
-			this.query = query;
-		}
-	}
-
-	function parseData(lang, data){
-		let request = new XMLHttpRequest();
-		let entry;
-		request.open("GET", data);
-		request.onload=function(){
-				let gSheet = JSON.parse(request.responseText);
-				entry = gSheet['feed']['entry'];
-				console.log(entry[0].gsx$title)
-				for(let i in entry){ // 각 행에대해 아래 스크립트를 실행합니다.
-					const person = new individual(entry[i].gsx$title['$t'], entry[i].gsx$name['$t'], entry[i].gsx$url['$t'], entry[i].gsx$description['$t'], entry[i].gsx$team['$t'], entry[i].gsx$personalurl['$t'], entry[i].gsx$email['$t'], entry[i].gsx$query['$t'])
-					dataSheet[lang][i] = person;
-				}
-		}
-		request.send();
-	}
-
-	parseData('ko', dataKO);
-	parseData('en', dataEN);
-	console.log(dataSheet);
-	resolve(dataSheet);
 }
 
 // draw initial div in grid-container
@@ -222,9 +221,9 @@ checkUrl(url)
       p.lang ? removeLang(p) : keepLang(p)
       }
     )
-	.catch(getData)
-	.then(getData)
-	.then(contentDraw)
+		.catch(getData)
+		.then(getData)
+		.then(contentDraw)
 
 console.log(paramsObj);
 console.log(currLang);
