@@ -63,6 +63,9 @@ const keepLang = params => {
 
 //get google sheet JSON data
 function getData(){
+	return new Promise((resolve,reject)=>{
+
+	})
 	//google spreadsheet link
 	const dataKO = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/1/public/full?alt=json";
 	const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A1LfzPPB91hywmxkQLZb-dfU/2/public/full?alt=json";
@@ -98,13 +101,13 @@ function getData(){
 	parseData('ko', dataKO);
 	parseData('en', dataEN);
 	console.log(dataSheet);
-	return pageIdx
+	resolve(dataSheet);
 }
 
 // draw initial div in grid-container
 function contentDraw(pageIdx){
 
-	return new Promise(()=>{
+	return new Promise((resolve, reject)=>{
 		//global container
 		const gC = $(".grid-container");
 
@@ -209,6 +212,7 @@ function contentDraw(pageIdx){
 		function projectDraw(pageIdx){
 
 		}
+		resolve();
 	})
 }
 
