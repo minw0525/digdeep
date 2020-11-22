@@ -64,19 +64,19 @@ function checkUrl(url){
 }
 
 const removeLang = params => {
-  console.log(url)
-  url = url.replace(langPart,"");
-  currLang = "ko";
-  console.log(url);
-  console.log (pageIdx);
-  window.location.href = url;
-  return pageIdx;
+	console.log(url)
+	url = url.replace(langPart,"");
+	currLang = "ko";
+	console.log(url);
+	console.log (pageIdx);
+	window.location.href = url;
+	return pageIdx;
 }
 
 const keepLang = params => {
-  currLang = "ko";
-  console.log(pageIdx);
-  return pageIdx;
+	currLang = "ko";
+	console.log(pageIdx);
+	return pageIdx;
 }
 
 
@@ -124,7 +124,7 @@ async function initData(data, lang){
 		});
 	}
 
-	 	return getData(data).then(copyData);
+	return getData(data).then(copyData);
 }
 
 
@@ -147,7 +147,7 @@ function contentDraw(dataSheet){
 		//global container
 		const gC = $(".grid-container");
 		gC.empty();
-		
+
 		console.log(dataSheet);
 		switch (pageIdx) {
 			case 1: //page index => main
@@ -167,7 +167,7 @@ function contentDraw(dataSheet){
 
 		//main page
 		function mainDraw(data){
-			gC.css('grid-template-columns', 'repeat(7, 1fr) 160px 160px')
+			gC.attr('style','grid-template-columns: repeat(7, 1fr) 160px 160px');
 			$('.logo h1').css('grid-column','1/3');
 
 			console.log(data);
@@ -218,9 +218,9 @@ function contentDraw(dataSheet){
 				const workLink = $("<a></a>");
 				if(paramsObj.lang){
 					workLink.attr("href",`./project?student=${data[i].query}&lang=${currLang}`);
-				  }else{
-					workLink.attr('href', `./project?student=${data[i].query}`);
-				  }
+				}else{
+				workLink.attr('href', `./project?student=${data[i].query}`);
+				}
 
 				//append block tag
 				const nameBlock = $(`<div></div>`);
@@ -261,7 +261,8 @@ function contentDraw(dataSheet){
 		}
 		//project page
 		function projectDraw(data){
-			gC.css( 'grid-template-columns','repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 160px 160px;')
+			gC.attr('style','grid-template-columns: repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 160px 160px;');
+			$('.logo h1').css('grid-column','1/2');
 
 			//apply url box in header
 			const logoBlock = $('.logo');
@@ -338,31 +339,11 @@ function contentDraw(dataSheet){
 					stickyWrapper.append(stickImg);
 				}
 			}
-			 
+
 			const index = $('<div></div>');
 			index.attr('class', 'index item');
 			gC.append(index);
 
-			/*
-			<div class="item worksTitle">
-      	<span class="title"></span>
-				<span class="name"></span>
-				<video src=""></video>
-      </div>
-      <div class="item worksDescription">
-      	<p class="description"></p>
-      </div>
-      <div class="item stickyWrapper">
-        <div class="stick spacer"></div>
-        <img src="" alt="" class="stick">
-        <img src="" alt="" class="stick">
-        <img src="" alt="" class="stick">
-        <img src="" alt="" class="stick">
-        <img src="" alt="" class="stick">
-        <div class="stick spacer"></div>
-      </div>
-      <div class="item worksIndex"></div>
-			*/
 			return pageIdx;
 		}
 		resolve(dataSheet);
@@ -402,31 +383,31 @@ function contentFill(dataSheet){
 		//main page
 		function mainFill(data){
 			function fillMainInfo(data){
-			  const lexicon = $('.info>p:first-of-type');
-			  const keynote = $('.info>p:last-of-type');
-			  console.log(currLang);
-			  switch (currLang){
-			    case 'ko':
-			      console.log(lexicon);
-			      lexicon.html('1. (무엇을 알아내기 위해) 깊이 파고들다<br>2. (장비 따위의) 필요한 것을 찾기 위해 노력하다.');
-			      keynote.html('2020년, 준비를 마친 인부들이 이동을 시작했다.<br>오프라인에서 온라인으로, 전신의 움직임에서 손가락의 작은 움직임으로, 땅 위에서 픽셀 위로….<br>수많은 변화 속에서 그들은 존재를 지속할 수 있는 무언가를 찾아 나섰다.각자가 속한 그리드와 픽셀 위에서, 28명의 인부들은 삽을 들고 더 깊은 아래를 향해 웹 속을 파고든다. 그 끝에 발굴해낸 새로운 가능성과 존재의 조각이 궁금하다면,')
-			      break;
-			    case 'en':
-			      console.log(keynote);
-			      lexicon.html('1. search thoroughly for information<br>2. try hard to provide the money, equipment, etc.');
-			      keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online, from full-body movement to small finger movements, from the ground to pixels above...<br>Amidst a multitude of changes,they longed to find that “something” (or quality) that will rest immortally. On top of the grid and pixels to which they correspond, twenty-eight members hold a shovel to dig deeper into the web. If you are curious about the new possibilities and pieces unearthed,');
-			      break;
-			  }
+				const lexicon = $('.info>p:first-of-type');
+				const keynote = $('.info>p:last-of-type');
+				console.log(currLang);
+				switch (currLang){
+					case 'ko':
+					console.log(lexicon);
+					lexicon.html('1. (무엇을 알아내기 위해) 깊이 파고들다<br>2. (장비 따위의) 필요한 것을 찾기 위해 노력하다.');
+					keynote.html('2020년, 준비를 마친 인부들이 이동을 시작했다.<br>오프라인에서 온라인으로, 전신의 움직임에서 손가락의 작은 움직임으로, 땅 위에서 픽셀 위로….<br>수많은 변화 속에서 그들은 존재를 지속할 수 있는 무언가를 찾아 나섰다.각자가 속한 그리드와 픽셀 위에서, 28명의 인부들은 삽을 들고 더 깊은 아래를 향해 웹 속을 파고든다. 그 끝에 발굴해낸 새로운 가능성과 존재의 조각이 궁금하다면,')
+					break;
+					case 'en':
+					console.log(keynote);
+					lexicon.html('1. search thoroughly for information<br>2. try hard to provide the money, equipment, etc.');
+					keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online, from full-body movement to small finger movements, from the ground to pixels above...<br>Amidst a multitude of changes,they longed to find that “something” (or quality) that will rest immortally. On top of the grid and pixels to which they correspond, twenty-eight members hold a shovel to dig deeper into the web. If you are curious about the new possibilities and pieces unearthed,');
+					break;
+				}
 			}
 
 			function fillMainTagText(data){
-			  const blockTags = Array.prototype.slice.call($('.blockTag'))
-			  blockTags.map(e=>{
-			    let i = blockTags.indexOf(e);
-			    const blockContent = [data[i].name, data[i].title];
-			    e.childNodes[0].childNodes[0].textContent = blockContent[0];
-			    e.childNodes[1].textContent = blockContent[1];
-			  })
+				const blockTags = Array.prototype.slice.call($('.blockTag'))
+				blockTags.map(e=>{
+					let i = blockTags.indexOf(e);
+					const blockContent = [data[i].name, data[i].title];
+					e.childNodes[0].childNodes[0].textContent = blockContent[0];
+					e.childNodes[1].textContent = blockContent[1];
+				})
 			}
 			fillMainInfo(data);
 			fillMainTagText(data);
@@ -452,10 +433,10 @@ function contentFill(dataSheet){
 //promise chain
 console.log(url)
 checkUrl(url)
-  .then(p=>{
-    p.lang ? removeLang(p) : keepLang(p)
-    }
-  )
+	.then(p=>{
+		p.lang ? removeLang(p) : keepLang(p)
+		}
+	)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
 	.then(contentDraw)
@@ -488,17 +469,17 @@ $(window).bind('popstate', function(e) {
 // a tag onclick pushstate event
 $(document).on("click", "a", function(e) {
 	e.preventDefault();
-  let href = $(this).attr("href");
-  console.log(href);
-  history.pushState(href,"", href);
-	checkUrl(url)
-	  .then(p=>{
-	    p.lang ? removeLang(p) : keepLang(p)
-	    }
-	  )
+	let href = $(this).attr("href");
+	console.log(href);
+	history.pushState(href,"", href);
+		checkUrl(url)
+		.then(p=>{
+			p.lang ? removeLang(p) : keepLang(p)
+			}
+		)
 	initData(dataKO,'ko')
 		.then(()=>initData(dataEN,'en'))
-  	.then(contentDraw)
+		.then(contentDraw)
 		.then(contentFill); //spa로 만들기
-  return false;
+	return false;
 });
