@@ -490,11 +490,9 @@ checkUrl(url)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
 	.then(contentFill) //지울거
-	/*
 	.then(contentDraw)
 	.then(contentFill)
 	.catch(console.log)
-	*/
 
 		/*
 		.then(contentDraw(pageIdx,dataSheet))
