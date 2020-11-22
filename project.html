@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Dig Deep: 2020</title>
+		<link rel="stylesheet" href="css/style.css">
+    <script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script defer src="javascript/script.js"></script>
+  </head>
+  <body>
+		<div class="header">
+			<div class="logo">
+        <h1 class="item">Dig Deep</h1>
+        <div class="nameTag item"><!--여기부터-->
+          <span class="title" data-detect="title">Companion Obervations by Fish</span> 
+          <span class="name" data-detect="name">Haram Min</span>
+        </div><!--여기까지-->
+      </div>
+			<div class="addon">
+				<span class="credit item">Credit</span>
+				<span class="altLang item">
+					<span class="ko ">KR</span><span>/</span><span class="en ">EN</span>
+				</span>
+			</div>
+		</div>
+    </div>
+    <div class="grid-container">
+      <div class="leftPannel"> <!--여기서부터 지움-->
+        <div class="personal item">
+          <video src="video/thumbnail_jiu.mp4" autoplay loop muted></video>
+          <span><a href="/" title="name" target="blank" class="url" data-detect="url">aejiu.com</a></span>
+        </div>
+        <div class="description item">
+          <div class="descrBox">
+            <p data-detect="description">Fear stems from the obscure and the unknwon. Paradoxically, this obscure nature yields curiosity and draws us to the unknown. Obscurious Film Festival explores the ambivalent emotion of fear and curisoity through the means of horror cinema.</p>
+          </div>
+        </div>
+      </div>
+      <div class="stickyWrapper item">
+        <div class="stick spacer"></div>
+        <img src="/" class="stick stick-img" alt="">
+        <img src="/" class="stick stick-img" alt="">
+        <img src="/" class="stick stick-img" alt="">
+        <img src="/" class="stick stick-img" alt="">
+        <img src="/" class="stick stick-img" alt="">
+        <div class="stick spacer"></div>
+      </div>
+      <div class="index item"></div><!--여기까지 지움-->
+    </div>
+    <script>
+    function isMobile(){
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        // true for mobile device
+        return true;
+      }else{
+        // false for not mobile device
+        console.log('not mobile');
+        return false;
+      }
+    }
+
+    if(isMobile()){
+      window.location.href = "/mobile.html";	//모바일페이지
+    }
+    </script>
+  </body>
+</html>
