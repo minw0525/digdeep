@@ -46,6 +46,7 @@ h1 a{
     font-size: var(--font_big);
     font-weight: 500;
     padding-left: 4rem;
+    text-decoration: none;
 }
 h2 {
     font-weight: 600;
