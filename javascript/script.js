@@ -467,7 +467,7 @@ function contentFill(dataSheet){
 			function urlSet(data){
 				const urlLink = $('.url');
 				urlLink.attr({
-					'href': data['url'],
+					'href': `https://${data['url']}`,
 					'title': data['name']
 				});
 			}			
