@@ -33,17 +33,19 @@ function checkUrl(url){
 		filePath = window.location.pathname;
 		function getFilePath(path){
 			switch (path) {
-				case "/digdeep/index.html":
+				//case "/digdeep/index.html":
+				case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
 
-				case "/digdeep/project":
+				//case "/digdeep/project":
+				case '/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/project' :
 					pageIdx = 2;
-					console.log(pageIdx)
+					console.log(pageIdx);
 					return pageIdx;
 
-				case "/digdeep/credit":
+				case '/digdeep/credit':
 					pageIdx = 3;
 					console.log(pageIdx)
 					return pageIdx;
@@ -165,6 +167,9 @@ function contentDraw(dataSheet){
 
 		//main page
 		function mainDraw(data){
+			gC.css('grid-template-columns', 'repeat(7, 1fr) 160px 160px')
+			$('.logo h1').css('grid-column','1/3');
+
 			console.log(data);
 			const about = $('<div></div>');
 			about.attr('class', 'item about');
@@ -199,8 +204,10 @@ function contentDraw(dataSheet){
 				//create childern inside digging booth
 				const thumbnail = $("<img>");
 				const blockTag = $("<div></div>");
-				thumbnail.attr('src',`image/1.png`);
-				thumbnail.attr('class', `thumbnail ${data[i].query}Thumbnail`);
+				thumbnail.attr({
+					'src': `image/1.png`,
+					'class': `thumbnail ${data[i].query}Thumbnail`
+				});
 				/*item.css({
 					//'background-image' : `url(\'image/diggingman.png\') center /contain no-repeat content-box`,
 					'background' : 'url(\'image/diggingman.png\') center /contain no-repeat content-box'
@@ -254,21 +261,87 @@ function contentDraw(dataSheet){
 		}
 		//project page
 		function projectDraw(data){
+			gC.css( 'grid-template-columns','repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 160px 160px;')
 
 			//apply url box in header
-			const header = $('.logo');
+			const logoBlock = $('.logo');
 
-			const worksHeader = $('<div></div>');
-			worksHeader.attr('class','worksHeader');
+			const nameTag = $('<div></div>');
+			nameTag.attr('class','nameTag item');
+			const titleText = $('<span></span>');
+			const nameText = $('<span></span>');
+			titleText.attr({ 
+				'class': 'title',
+				'data-detect': 'title'
+			});
+			nameText.attr({
+				'class': 'name',
+				'data-detect': 'name'
+			});
+			
+			logoBlock.append(nameTag);
+			nameTag.append(titleText, nameText);
+
+
+			//left pannel
+			const leftPannel = $('<div></div>');
+			leftPannel.attr('class', 'leftPannel');
+			gC.append(leftPannel);
+
+			const personal = $('<div></div>');
+			personal.attr('class', 'personal item');
+			leftPannel.append(personal);
+
+			const diggingVid = $('<video autoplay muted loop></video>');
+			diggingVid.attr('src', `video/thumbnail_jiu.mp4`);
 			const urlBox = $('<span></span>');
-			const nameBox = $('<span></span>');
-			urlBox.attr('class','url');
-			nameBox.attr('class','name');
+			personal.append(diggingVid, urlBox);
 
-			worksHeader.append(urlBox, nameBox);
+			const urlLink = $('<a></a>');
+			urlLink.attr({
+				'target': 'blank',
+				'class': 'url',
+				'data-detect': 'url'
+			})
+			urlBox.append(urlLink);
 
-			const descrBox =""
+			const description = $('<div></div>');
+			description.attr('class','description item');
 
+			const descrBox = $('<div></div>');
+			descrBox.attr('class','descrBox');
+
+			const descrText = $('<p></p>');
+			descrText.attr('data-detect','description');
+
+			leftPannel.append(description);
+			description.append(descrBox);
+			descrBox.append(descrText);
+
+
+
+			//sticky wrapper 
+			const stickyWrapper = $('<div></div>');
+			stickyWrapper.attr('class','stickyWrapper item');
+			gC.append(stickyWrapper);
+			//append image loop
+			for(let i=0; i<2; i++){
+				const spacer = $('<div></div>')
+				spacer.attr('class','stick spacer');
+				stickyWrapper.append(spacer);
+
+				if(i===1) break;
+
+				for(let j = 0; j<5; j++){
+					const stickImg = $('<img></img>');
+					stickImg.attr('class', 'stick stick-img');
+					stickyWrapper.append(stickImg);
+				}
+			}
+			 
+			const index = $('<div></div>');
+			index.attr('class', 'index item');
+			gC.append(index);
 
 			/*
 			<div class="item worksTitle">
@@ -388,6 +461,8 @@ initData(dataKO,'ko')
 	.then(contentDraw)
 	.then(contentFill)
 	.catch(console.log)
+	
+
 		/*
 		.then(contentDraw(pageIdx,dataSheet))
 		.then(()=>{
@@ -395,6 +470,9 @@ initData(dataKO,'ko')
 			console.log(currLang);
 			console.log(pageIdx);
 		})*/
+
+
+
 
 //bind popstate event
 $(window).bind('popstate', function(e) {
