@@ -123,7 +123,6 @@ async function initData(data, lang){
 			resolve(dataSheet);
 		});
 	}
-	pageIdx = 2;
 
 	return getData(data).then(copyData);
 
