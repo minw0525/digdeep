@@ -305,8 +305,10 @@ video {
     grid-column: 10/11;
     grid-row: 1/5;
     min-width: 160px;
+    padding: 2rem 0;
 }
 .index p {
     font-size: calc(var(--font_small) * 0.95);
-    line-height: 1.8;
+    text-align: center;
+    line-height: 1.9;
 }
