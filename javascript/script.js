@@ -517,9 +517,8 @@ const reFill = function(url){
 			p.lang ? removeLang(p) : keepLang(p)
 			}
 		)
-	initData(dataKO,'ko')
-		.then(()=>initData(dataEN,'en'))
-		.then(contentDraw)
+	console.log(dataSheet);
+	contentDraw(dataSheet)
 		.then(contentFill)
 		.catch(console.log)
 }
