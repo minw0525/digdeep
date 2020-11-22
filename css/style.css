@@ -307,6 +307,6 @@ video {
     min-width: 160px;
 }
 .index p {
-    font-size: calc(100vh / 37);
-    //font-size: 2rem;
+    font-size: calc(var(--font_small) * 0.95);
+    line-height: 1.8;
 }
