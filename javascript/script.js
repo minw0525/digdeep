@@ -448,7 +448,7 @@ function contentFill(dataSheet){
 					}else{
 						indexLink.attr("href","?student="+data[i].query);
 					}
-					indexLink.attr("class","indexItem");
+					indexLink.attr("class","spa");
 					$(".index").append(indexLink);
 					indexLink.html("<p>"+data[i].name+"</p>");
 				})
@@ -536,7 +536,7 @@ $(window).bind('popstate', function(e) {
 });
 
 // a tag onclick pushstate event
-$(document).on("click", "a", function(e) {
+$(document).on("click", "a.spa", function(e) {
 	e.preventDefault();
 	let href = $(this).attr("href");
 	console.log(href);
