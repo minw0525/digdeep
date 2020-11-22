@@ -123,8 +123,10 @@ async function initData(data, lang){
 			resolve(dataSheet);
 		});
 	}
+	pageIdx = 2;
 
 	return getData(data).then(copyData);
+
 }
 
 
@@ -264,7 +266,7 @@ function contentDraw(dataSheet){
 			gC.attr('style','grid-template-columns: repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 160px 160px;');
 			$('.logo h1').css('grid-column','1/2');
 			$('.nameTag').remove();
-			
+
 			//apply url box in header
 			const logoBlock = $('.logo');
 
@@ -372,6 +374,7 @@ function contentFill(dataSheet){
 				mainFill(dataSheet[currLang]);
 				break;
 			case 2: //page index => project
+				arrRandomShuffle(dataSheet);
 				projectFill(dataSheet[currLang]);
 				break;
 			case 3: //page index => credit
@@ -465,8 +468,7 @@ function contentFill(dataSheet){
 			renderTxt(data);
 			return pageIdx;
 		}
-		
-		
+
 		//credit page
 		function creditFill(data){
 			return pageIdx;
@@ -487,10 +489,12 @@ checkUrl(url)
 	)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
+	.then(contentFill) //지울거
+	/*
 	.then(contentDraw)
 	.then(contentFill)
 	.catch(console.log)
-	
+	*/
 
 		/*
 		.then(contentDraw(pageIdx,dataSheet))
@@ -527,9 +531,23 @@ $(document).on("click", "a", function(e) {
 		p.lang ? removeLang(p) : keepLang(p)
 		}
 	)
+
 	initData(dataKO,'ko')
 		.then(()=>initData(dataEN,'en'))
 		.then(contentDraw)
 		.then(contentFill); //spa로 만들기
 	return false;
 });
+
+// shuffle array randomly
+function arrRandomShuffle(obj){
+    const array1 = obj["ko"];
+    const array2 = obj["en"];
+    for (let i = array1.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array1[i], array1[j]] = [array1[j], array1[i]];
+        [array2[i], array2[j]] = [array2[j], array2[i]];
+    }
+    console.log(obj);
+    return obj;
+}
