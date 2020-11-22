@@ -217,6 +217,7 @@ function contentDraw(dataSheet){
 
 				// work link
 				const workLink = $("<a></a>");
+				workLink.attr('class','spa');
 				if(paramsObj.lang){
 					workLink.attr("href",`./project?student=${data[i].query}&lang=${currLang}`);
 				}else{
