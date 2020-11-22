@@ -472,11 +472,13 @@ $(document).on("click", "a", function(e) {
 	let href = $(this).attr("href");
 	console.log(href);
 	history.pushState(href,"", href);
-		checkUrl(url)
-		.then(p=>{
-			p.lang ? removeLang(p) : keepLang(p)
-			}
-		)
+	url = window.location.href;
+
+	checkUrl(url)
+	.then(p=>{
+		p.lang ? removeLang(p) : keepLang(p)
+		}
+	)
 	initData(dataKO,'ko')
 		.then(()=>initData(dataEN,'en'))
 		.then(contentDraw)
