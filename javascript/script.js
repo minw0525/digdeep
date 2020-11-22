@@ -146,18 +146,17 @@ function contentDraw(dataSheet){
 	return new Promise((resolve, reject)=>{
 		//global container
 		const gC = $(".grid-container");
+		gC.empty();
+		
 		console.log(dataSheet);
 		switch (pageIdx) {
 			case 1: //page index => main
-				gC.empty();
 				mainDraw(dataSheet[currLang]);
 				break;
 			case 2: //page index => project
-				gC.empty();
 				projectDraw(dataSheet[currLang]);
 				break;
 			case 3: //page index => credit
-				gC.empty();
 				creditDraw(dataSheet[currLang]);
 				break;
 			default: alert('wrong page!');
