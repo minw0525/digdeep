@@ -526,14 +526,12 @@ const reFill = function(url){
 
 
 //bind popstate event
-$(window).bind('popstate', function(e) {
+$(window).bind('popstate', function() {
     let returnLocation = history.location || document.location;
     console.log(returnLocation)
     let href = returnLocation.search;
-    //mainRefill(href);
-		let prevState = e.state;
-		console.log(e );
-		$('body').innerHTML = prevState;
+	reFill(href);
+
 });
 
 // a tag onclick pushstate event
