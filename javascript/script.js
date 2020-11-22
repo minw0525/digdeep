@@ -33,7 +33,6 @@ function checkUrl(url){
 		filePath = window.location.pathname;
 		function getFilePath(path){
 			switch (path) {
-				//case "/digdeep/index.html":
 				case "/digdeep/index.html":
 					pageIdx = 1;
 					console.log(pageIdx)
@@ -399,7 +398,9 @@ $(document).on("click", "a", function(e) {
 	    p.lang ? removeLang(p) : keepLang(p)
 	    }
 	  )
-  contentDraw()
+	initData(dataKO,'ko')
+		.then(()=>initData(dataEN,'en'))
+  	.then(contentDraw)
 		.then(contentFill); //spa로 만들기
   return false;
 });
