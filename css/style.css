@@ -42,7 +42,7 @@ div {
     -ms-hyphens: auto;
     hyphens: auto;
 }
-h1 {
+h1 a{
     font-size: var(--font_big);
     font-weight: 500;
     padding-left: 4rem;
