@@ -373,7 +373,6 @@ function contentFill(dataSheet){
 				mainFill(dataSheet[currLang]);
 				break;
 			case 2: //page index => project
-				arrRandomShuffle(dataSheet);
 				projectFill(dataSheet[currLang]);
 				break;
 			case 3: //page index => credit
@@ -498,6 +497,7 @@ checkUrl(url)
 	)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
+	.then(arrRandomShuffle)
 	.then(contentDraw)
 	.then(contentFill)
 	.catch(console.log)
@@ -511,6 +511,18 @@ initData(dataKO,'ko')
 		})*/
 
 
+const reFill = function(url){
+	checkUrl(url)
+		.then(p=>{
+			p.lang ? removeLang(p) : keepLang(p)
+			}
+		)
+	initData(dataKO,'ko')
+		.then(()=>initData(dataEN,'en'))
+		.then(contentDraw)
+		.then(contentFill)
+		.catch(console.log)
+}
 
 
 //bind popstate event
