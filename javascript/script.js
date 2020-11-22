@@ -34,7 +34,7 @@ function checkUrl(url){
 		function getFilePath(path){
 			switch (path) {
 				//case "/digdeep/index.html":
-				case "/digdeep/index.html" :
+				case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
@@ -118,7 +118,6 @@ async function initData(data, lang){
 			for (let i in entry) { // 각 행에대해 아래 스크립트를 실행합니다.
 					const person = new Individual(entry[i].gsx$title['$t'],entry[i].gsx$name['$t'],entry[i].gsx$url['$t'],entry[i].gsx$description['$t'],entry[i].gsx$team['$t'],entry[i].gsx$personalurl['$t'],entry[i].gsx$email['$t'],entry[i].gsx$role['$t'],entry[i].gsx$query['$t'])
 					dataSheet[lang][i] = person;
-					console.log(person.title);
 			}
 			console.log('copying done')
 			console.log(dataSheet);
@@ -181,15 +180,17 @@ function contentDraw(dataSheet){
 			last.text('dig deep.');
 
 			const jail = $('<div></div>');
-			jail.attr('class', 'item jail');
+			jail.attr('class', 'jail');
 
 			for(let i = 0; i<28; i++){
 				const item = $('<div></div>');
 				item.attr('class', `item booth diggingDiv ${data[i].query}` );
 
 				const video = $('<video autoplay muted loop></video>');
+				//const source = $(`<source src="video/thumbnail_jiu.mp4" type="video/mp4">`)
 				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
 				video.attr('src',`video/thumbnail_jiu.mp4`);
+				//video.append(source);
 				item.append(video);
 
 
@@ -228,7 +229,6 @@ function contentDraw(dataSheet){
 				gC.append(about);
 				about.append(info);
 				info.append(title, p1, p2, last);
-				console.log(data);
 
 				item.append(wrappingBlock);
 				wrappingBlock.append(thumbnail, workLink);
@@ -334,7 +334,6 @@ function contentFill(dataSheet){
 			    const blockContent = [data[i].name, data[i].title];
 			    e.childNodes[0].childNodes[0].textContent = blockContent[0];
 			    e.childNodes[1].textContent = blockContent[1];
-			    console.log(e)
 			  })
 			}
 			fillMainInfo(data);
@@ -395,6 +394,11 @@ $(document).on("click", "a", function(e) {
   let href = $(this).attr("href");
   console.log(href);
   history.pushState(href,"", href);
+	checkUrl(url)
+	  .then(p=>{
+	    p.lang ? removeLang(p) : keepLang(p)
+	    }
+	  )
   contentDraw()
 		.then(contentFill); //spa로 만들기
   return false;
