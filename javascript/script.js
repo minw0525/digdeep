@@ -416,6 +416,41 @@ function contentFill(dataSheet){
 
 		//project page
 		function projectFill(data){
+			$('div').scrollTop(0);
+
+			function renderTxt(data){
+				console.log(data);
+				let isTarget = function(el){
+					if(el.query === paramsObj.student) return true;
+				};
+				console.log(isTarget(data));
+				let targetData = data.find(isTarget);
+				console.log(targetData);
+				
+				let changeList = Array.prototype.slice.call($('[data-detect]'))
+				changeList.map(v=>{
+					v.textContent = targetData[v.dataset.detect]
+				})
+				indexFill(data);
+			}
+
+			//fill index
+			function indexFill(data){
+				$(".index").empty();
+				$.each(data,i=>{
+					let indexLink = $("<a></a>");
+					if(paramsObj.lang){
+						indexLink.attr("href","?student="+data[i].query+"&lang="+currLang);
+					}else{
+						indexLink.attr("href","?student="+data[i].query);
+					}
+					indexLink.attr("class","indexItem");
+					$(".index").append(indexLink);
+					indexLink.html("<p>"+data[i].name+"</p>");
+				})
+			}
+
+			renderTxt(data);
 			return pageIdx;
 		}
 
