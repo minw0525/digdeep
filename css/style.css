@@ -130,7 +130,8 @@ h2{
 }
 .diggingDiv{
 	width: 100%;
-	height: calc(25vh - 17px);
+	max-height: -webkit-fill-available;
+	min-height: calc(25vh - 17px);
 	display : flex;
 }
 video{
