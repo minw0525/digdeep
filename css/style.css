@@ -306,3 +306,7 @@ video {
     grid-row: 1/5;
     min-width: 160px;
 }
+.index p {
+    font-size: calc(100vh / 37);
+    //font-size: 2rem;
+}
