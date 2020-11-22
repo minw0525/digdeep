@@ -450,10 +450,22 @@ function contentFill(dataSheet){
 				})
 			}
 
+						//sticky image fill
+			function stickyImageSet(student){
+				const imgBoxes = Array.prototype.slice.call($('.stick-img'))
+				imgBoxes.map(e=>{
+				let i = imgBoxes.indexOf(e)+1;
+				//e.src = 'image/'+student+i+'.png';
+				e.src = 'image/'+''+i+'.png';
+				})
+			}
+
+			stickyImageSet(paramsObj.student);
 			renderTxt(data);
 			return pageIdx;
 		}
-
+		
+		
 		//credit page
 		function creditFill(data){
 			return pageIdx;
