@@ -263,7 +263,8 @@ function contentDraw(dataSheet){
 		function projectDraw(data){
 			gC.attr('style','grid-template-columns: repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 160px 160px;');
 			$('.logo h1').css('grid-column','1/2');
-
+			$('.nameTag').remove();
+			
 			//apply url box in header
 			const logoBlock = $('.logo');
 
