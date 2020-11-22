@@ -430,6 +430,8 @@ function contentFill(dataSheet){
 				let targetData = data.find(isTarget);
 				console.log(targetData);
 				
+				urlSet(targetData);				
+				
 				let changeList = Array.prototype.slice.call($('[data-detect]'))
 				changeList.map(v=>{
 					v.textContent = targetData[v.dataset.detect]
@@ -463,6 +465,14 @@ function contentFill(dataSheet){
 				})
 			}
 
+			function urlSet(data){
+				const urlLink = $('.url');
+				urlLink.attr({
+					'href': data[url],
+					'title': data[name]
+				});
+			}			
+			
 			stickyImageSet(paramsObj.student);
 			renderTxt(data);
 			return pageIdx;
