@@ -544,16 +544,7 @@ $(document).on("click", "a", function(e) {
 	history.pushState(href,"", href);
 	url = window.location.href;
 
-	checkUrl(url)
-	.then(p=>{
-		p.lang ? removeLang(p) : keepLang(p)
-		}
-	)
-
-	initData(dataKO,'ko')
-		.then(()=>initData(dataEN,'en'))
-		.then(contentDraw)
-		.then(contentFill); //spa로 만들기
+	reFill(url);
 	return false;
 });
 
