@@ -33,7 +33,7 @@ function checkUrl(url){
 		filePath = window.location.pathname;
 		function getFilePath(path){
 			switch (path) {
-				case "/digdeep/index.html":
+				case "/digdeep":
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
