@@ -209,7 +209,11 @@ function contentDraw(dataSheet){
 
 				// work link
 				const workLink = $("<a></a>");
-				workLink.attr('href',`./project?student=${data[i].query}`);
+				if(paramsObj.lang){
+					workLink.attr("href",`./project?student=${data[i].query}&lang=${currLang}`);
+				  }else{
+					workLink.attr('href', `./project?student=${data[i].query}`);
+				  }
 
 				//append block tag
 				const nameBlock = $(`<div></div>`);
@@ -250,6 +254,22 @@ function contentDraw(dataSheet){
 		}
 		//project page
 		function projectDraw(data){
+
+			//apply url box in header
+			const header = $('.logo');
+
+			const worksHeader = $('<div></div>');
+			worksHeader.attr('class','worksHeader');
+			const urlBox = $('<span></span>');
+			const nameBox = $('<span></span>');
+			urlBox.attr('class','url');
+			nameBox.attr('class','name');
+
+			worksHeader.append(urlBox, nameBox);
+
+			const descrBox =""
+
+
 			/*
 			<div class="item worksTitle">
       	<span class="title"></span>
@@ -321,7 +341,7 @@ function contentFill(dataSheet){
 			    case 'en':
 			      console.log(keynote);
 			      lexicon.html('1. search thoroughly for information<br>2. try hard to provide the money, equipment, etc.');
-			      keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online,from full-body movement to small finger movements,from the ground to pixels above...<br>Amidst a multitude of changes,they longed to find that “something” (or quality) that will rest immortally.On top of the grid and pixels to which they correspond,Twenty-eight members hold a shovel to dig deeper into the web.If you are curious about the new possibilities and pieces unearthed,');
+			      keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online, from full-body movement to small finger movements, from the ground to pixels above...<br>Amidst a multitude of changes,they longed to find that “something” (or quality) that will rest immortally. On top of the grid and pixels to which they correspond, twenty-eight members hold a shovel to dig deeper into the web. If you are curious about the new possibilities and pieces unearthed,');
 			      break;
 			  }
 			}
@@ -346,7 +366,7 @@ function contentFill(dataSheet){
 		}
 
 		//credit page
-		function projectFill(data){
+		function creditFill(data){
 			return pageIdx;
 		}
 		resolve();
