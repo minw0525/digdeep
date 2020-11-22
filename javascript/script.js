@@ -34,7 +34,7 @@ function checkUrl(url){
 		function getFilePath(path){
 			switch (path) {
 				//case "/digdeep/index.html":
-				case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
+				case "/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
