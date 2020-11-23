@@ -238,7 +238,7 @@ video {
     color: var(--blue);
 }
 .about > .info p {
-    padding-top: var(--min_gap);
+    padding-top: calc(var(--min_gap)*2);
     font-size: calc(var(--font_small) * 0.85);
     font-weight: 600;
     line-height: 1.85;
@@ -248,10 +248,15 @@ video {
     font-weight: 500;
     line-height: 1.5;
 }
-.about > .info > p:first-of-type {
+.about > .info > p:first-of-type,
+.about > .info > p:nth-of-type(2) {
     padding-top: calc(var(--min_gap) / 2);
-    margin-left: 3rem;
+    margin-left: 2rem;
+    text-indent: -2rem;
     font-style: italic;
+}
+.about > .info > p:nth-of-type(2) {
+    padding-top: 0;
 }
 
 /* project page style*/
