@@ -582,7 +582,7 @@ function altLang(){
       url = url.concat("?lang=en")
     }
     console.log(url);
-    history.pushState(url',"", url);
+    history.pushState(url,"", url);
     let href = window.location.search;
     console.log(href);
     reFill(href);
@@ -592,7 +592,7 @@ function altLang(){
     currLang = "ko";
     url = url.replace(paramReg,"");
     console.log(url);
-    history.pushState(url',"", url);
+    history.pushState(url,"", url);
     let href = window.location.search;
     console.log(href);
     reFill(href);
