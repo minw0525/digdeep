@@ -563,8 +563,8 @@ $(document).on('click', 'a.spa', function(e) {
 // shuffle array randomly
 function arrRandomShuffle(obj){
 	const copiedObj = JSON.parse(JSON.stringify(obj));
-    const array1 = obj['ko'];
-    const array2 = obj['en'];
+    const array1 = copiedObj['ko'];
+    const array2 = copiedObj['en'];
     for (let i = array1.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array1[i], array1[j]] = [array1[j], array1[i]];
