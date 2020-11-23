@@ -616,6 +616,6 @@ $(document).on("click", ".altLangOn", altLang)
 
 function makeMultilingual(){
 	$("body").multilingual([
-		'en', 'num'
+		'ko', 'en', 'num'
 	]);
 }
