@@ -419,7 +419,7 @@ function contentFill(data){
 				})
 			}
 			fillMainInfo(data);
-			fillMainTagText(dataSheet);
+			fillMainTagText(dataSheet[currLang]);
 			return data;
 		}
 
