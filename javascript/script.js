@@ -576,7 +576,7 @@ function altLang(){
   if(currLang === "ko"){
     url = window.location.href;
     currLang = "en";
-    if(url.paramReg){
+    if(paramReg.exec(url)[0]){
       url = url.replace(paramReg,"&lang=en");
     }else{
       url = url.concat("?lang=en")
