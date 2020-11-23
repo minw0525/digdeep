@@ -577,12 +577,12 @@ function altLang(){
     url = window.location.href;
     currLang = "en";
     if(url.paramReg){
-      url = url.replace(paramReg,"?lang=en");
+      url = url.replace(paramReg,"&lang=en");
     }else{
       url = url.concat("?lang=en")
     }
     console.log(url);
-    history.pushState('ko',"", url);
+    history.pushState(url',"", url);
     let href = window.location.search;
     console.log(href);
     reFill(href);
@@ -592,7 +592,7 @@ function altLang(){
     currLang = "ko";
     url = url.replace(paramReg,"");
     console.log(url);
-    history.pushState('en',"", url);
+    history.pushState(url',"", url);
     let href = window.location.search;
     console.log(href);
     reFill(href);
