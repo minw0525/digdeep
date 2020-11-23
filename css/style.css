@@ -64,7 +64,6 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 2px;
     overflow: hidden;
     min-width: 768px;
 }
@@ -102,6 +101,7 @@ h2 * {
     min-width: 100vw;
     gap: 2px;
     height: 60px;
+    border-bottom: 1px solid black;
 }
 .header span {
     font-size: calc(var(--font_mid) * 1.2);
@@ -116,7 +116,6 @@ h2 * {
     display: flex;
     justify-content: center;
     align-content: space-around;
-    gap: 2px;
     min-width: 320px;
 }
 .logo {
@@ -141,9 +140,11 @@ h2 * {
 }
 .credit {
     grid-column: 2/3;
+    border-right: 1px solid black;
 }
 .altLang {
     grid-column: 3/4;
+    border-left: 1px solid black;
 }
 .credit,
 .altLang {
@@ -183,11 +184,11 @@ h2 * {
         160px 160px; /*for project page test*/
     grid-template-rows: calc(100vh - 60px);
     gap: 2px;
+    border-top: 1px solid black;
 }
 .item {
     background-color: white;
     overflow: hidden scroll;
-    //border:1px solid black;
 }
 
 /* main page style*/
