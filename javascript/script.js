@@ -512,9 +512,8 @@ initData(dataKO,'ko')
 const reFill = function(url){
 	checkUrl(url)
 		.then(p=>{
-			p.lang ? removeLang(p) : keepLang(p)
-			}
-		)
+			if(p.lang) {removeLang(p)}
+	 	})
 	console.log(dataSheet);
 	contentDraw(dataSheet)
 		.then(contentFill)
