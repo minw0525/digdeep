@@ -53,7 +53,10 @@ function checkUrl(url){
 
 			}
 		}
-
+		
+		if(!currLang){
+			currLang = 'ko';
+		}
 		console.log(getParam());
 		console.log(getFilePath(filePath));
 		console.log(currLang);
@@ -66,17 +69,9 @@ function checkUrl(url){
 const removeLang = params => {
 	console.log(url)
 	url = url.replace(langPart,"");
-	currLang = "ko";
 	console.log(url);
 	console.log (pageIdx);
 	window.location.href = url;
-	return pageIdx;
-}
-
-const keepLang = params => {
-	currLang = "ko";
-	console.log(pageIdx);
-	return pageIdx;
 }
 
 
