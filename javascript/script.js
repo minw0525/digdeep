@@ -54,7 +54,7 @@ function checkUrl(url){
 			}
 		}
 		
-		if(!currLang){
+		if(currLang!=='en'){
 			currLang = 'ko';
 		}
 		console.log(getParam());
