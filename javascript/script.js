@@ -15,6 +15,8 @@ let entry;
 
 function checkUrl(url){
 	const currParam = paramReg.exec(url) ? paramReg.exec(url)[0] : null;
+	paramsObj = {};
+
 	return new Promise((resolve, reject)=>{
 
 		//get querystring
