@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>Dig Deep: 2020</title>
+	  <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>Dig Deep: 2020</title>
 		<link rel="stylesheet" href="css/style.css">
-    <script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
+ 		<script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script defer src="jquery.multilingual.min.js"></script>
 		<script defer src="javascript/script.js"></script>
-  </head>
-  <body>
+  	</head>
+  	<body>
 		<div class="header">
 			<div class="logo">
-        <h1 class="item"><a href="../digdeep/">Dig Deep</a></h1>
-        <!--<div class="nameTag item">
-          <span class="title" data-detect="title">Companion Obervations by Fish</span> 
-          <span class="name" data-detect="name">Haram Min</span>
-        </div>-->
-      </div>
+				<h1 class="item"><a href="../digdeep/">Dig Deep</a></h1>
+				<!--<div class="nameTag item">
+				  <span class="title" data-detect="title">Companion Obervations by Fish</span> 
+				  <span class="name" data-detect="name">Haram Min</span>
+				</div>-->
+			</div>
 			<div class="addon">
 				<span class="credit item">Credit</span>
 				<span class="altLang item">
@@ -49,20 +50,28 @@
       <div class="index item"></div>-->
     </div>
     <script>
-    function isMobile(){
-      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-        // true for mobile device
-        return true;
-      }else{
-        // false for not mobile device
-        console.log('not mobile');
-        return false;
+      function isMobile(){
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+          // true for mobile device
+          return true;
+        }else{
+          // false for not mobile device
+          console.log('not mobile');
+          return false;
+        }
       }
-    }
 
-    if(isMobile()){
-      window.location.href = "/mobile.html";	//모바일페이지
-    }
+      if(isMobile()){
+        window.location.href = "/mobile.html";	//모바일페이지
+      }
+
+
+      $(document).ready(function(e){
+        $(".content").multilingual([
+          "ko","en", "num"
+        ]);
+      });
+
     </script>
   </body>
 </html>
