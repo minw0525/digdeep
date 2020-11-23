@@ -263,7 +263,7 @@ function contentDraw(dataSheet){
 				})
 			}
 
-			return pageIdx;
+			return data;
 		}
 		//project page
 		function projectDraw(data){
@@ -351,7 +351,7 @@ function contentDraw(dataSheet){
 			index.attr('class', 'index item');
 			gC.append(index);
 
-			return pageIdx;
+			return data;
 		}
 		resolve(dataSheet);
 	})
@@ -418,7 +418,7 @@ function contentFill(dataSheet){
 			}
 			fillMainInfo(data);
 			fillMainTagText(data);
-			return pageIdx;
+			return data;
 		}
 
 		//project page
@@ -484,9 +484,9 @@ function contentFill(dataSheet){
 
 		//credit page
 		function creditFill(data){
-			return pageIdx;
+			return data;
 		}
-		resolve();
+		resolve(dataSheet);
 	})
 }
 
