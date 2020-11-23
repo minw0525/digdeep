@@ -201,7 +201,7 @@ function contentDraw(dataSheet){
 				const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
 				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
 				//video.attr('src',`video/thumb_kyuntae_250.mp4`);
-				//video.append(source);
+				video.append(source);
 				item.append(video);
 
 
