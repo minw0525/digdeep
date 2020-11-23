@@ -4,7 +4,7 @@ const dataEN = "https://spreadsheets.google.com/feeds/list/1vDv8wHMb6u0cX1td924A
 
 const paramsObj = {};
 const paramReg = /(\?|&)(\D|\d){1,}/;
-const langPart = /\?|&lang=(\D|\d){1,}/;
+const langPart = /(\?|&)lang=(\D|\d){1,}/;
 const dataSheet = {"ko":[],"en":[]};
 let filePath;
 let pageIdx;
