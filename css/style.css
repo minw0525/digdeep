@@ -1,10 +1,47 @@
+@font-face {
+    font-family: 'AritaDotum';
+    font-style: normal;
+    font-weight: 500;
+    src: local('아리따-돋움(OTF)'),
+        url('./webfont/AritaDotumMedium.woff2') format('woff2'),
+        url('./webfont/AritaDotumMedium.woff') format('woff'),
+        url('./webfont/AritaDotumMedium.ttf') format('truetype'),
+        url('./webfont/AritaDotumMedium.otf') format('opentype'),
+        url('./webfont/AritaDotumMedium.eot') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'AritaDotum';
+    font-style: normal;
+    font-weight: 600;
+    src: local('아리따-돋움(OTF)'),
+        url('./webfont/AritaDotumSemiBold.woff2') format('woff2'),
+        url('./webfont/AritaDotumSemiBold.woff') format('woff'),
+        url('./webfont/AritaDotumSemiBold.ttf') format('truetype'),
+        url('./webfont/AritaDotumSemiBold.otf') format('opentype'),
+        url('./webfont/AritaDotumSemiBold.eot') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'AritaDotum';
+    font-style: normal;
+    font-weight: 700;
+    src: local('아리따-돋움(OTF)'),
+        url('./webfont/AritaDotumBold.woff2') format('woff2'),
+        url('./webfont/AritaDotumBold.woff') format('woff'),
+        url('./webfont/AritaDotumBold.ttf') format('truetype'),
+        url('./webfont/AritaDotumBold.otf') format('opentype'),
+        url('./webfont/AritaDotumBold.eot') format('embedded-opentype');
+}
+
+
 :root {
     /*color*/
     --blue: #0909d1;
     /*size*/
     --min_gap: 15px;
     /*font*/
-    --font_family: covik-sans-mono, '아리따-돋움(OTF)', Roboto, sans-serif;
+    --font_family: covik-sans-mono, AritaDotum, Roboto, sans-serif;
     --font_big: 3rem;
     --font_mid: 2rem;
     --font_small: 1.7rem;
