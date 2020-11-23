@@ -510,7 +510,8 @@ initData(dataKO,'ko')
 	.then(contentDraw)
 	.then(data=>{
 		console.log(data);
-		return arrRandomShuffle(data);
+		//return arrRandomShuffle(data)
+		return data;
 	})
 	.then(contentFill)
 	.then(()=>(currLang == 'ko'
