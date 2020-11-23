@@ -508,7 +508,10 @@ console.log(url)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
 	.then(contentDraw)
-	.then(arrRandomShuffle)
+	.then(data=>{
+		console.log(data);
+		return arrRandomShuffle(data);
+	})
 	.then(contentFill)
 	.then(()=>(currLang == 'ko'
 		?($(".ko").addClass('altLangOff'),$(".en").addClass('altLangOn'))
