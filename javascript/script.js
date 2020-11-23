@@ -578,10 +578,10 @@ function altLang(){
 	if(currLang === "ko"){
 		url = window.location.href;
 		currLang = "en";
-		if(url.search(/\?student/)>0){
-		url = url.replace(langPart,"&lang=en");
+		if(paramsObj.student){
+			url = url.concat("&lang=en");
 		}else{
-		url = url.concat("?lang=en")
+			url = url.concat("?lang=en")
 		}
 		console.log(url);
 		history.pushState(url,"", url);
