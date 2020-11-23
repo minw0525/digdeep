@@ -170,6 +170,8 @@ function contentDraw(dataSheet){
 		function mainDraw(data){
 			gC.attr('style','grid-template-columns: repeat(7, 1fr) 160px 160px');
 			$('.logo h1').css('grid-column','1/3');
+			$('.nameTag').remove();
+			
 
 			console.log(data);
 			const about = $('<div></div>');
