@@ -204,12 +204,11 @@ video {
     flex-direction: column-reverse;
     justify-content: space-between;
 }
-.blockTag span {
-    font-size: var(--font_small);
+.blockTag > * {
     padding: 3px 7px;
 }
-.nameBlock span:last-child {
-    font-size: var(--font_mid);
+.blockTag > * span {
+    font-size: var(--font_small);
 }
 .blockTag > .title {
 }
@@ -238,6 +237,11 @@ video {
     font-size: calc(var(--font_small) * 0.95);
     font-weight: 500;
     line-height: 1.5;
+}
+.about > .info p .ml-ko {
+    font-size: calc(var(--font_small) * 0.85);
+    font-weight: 600;
+    line-height: 1.85;
 }
 
 .about > .info > p:first-of-type {
