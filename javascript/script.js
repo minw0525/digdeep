@@ -577,8 +577,8 @@ function altLang(){
 	if(currLang === "ko"){
 		url = window.location.href;
 		currLang = "en";
-		if(paramReg.exec(url)){
-		url = url.concat(paramReg,"&lang=en");
+		if(langPart.exec(url)){
+		url = url.concat(langPart,"&lang=en");
 		}else{
 		url = url.concat("?lang=en")
 		}
@@ -591,7 +591,7 @@ function altLang(){
 	}else if(currLang === "en"){
 		url = window.location.href;
 		currLang = "ko";
-		url = url.replace(paramReg,"");
+		url = url.replace(langPart,"");
 		console.log(url);
 		history.pushState(url,"", url);
 		let href = window.location.search;
