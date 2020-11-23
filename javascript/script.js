@@ -191,7 +191,7 @@ function contentDraw(dataSheet){
 
 			for(let i = 0; i<28; i++){
 				const item = $('<div></div>');
-				item.attr('class', `item booth diggingDiv` );
+				item.attr('class', `item booth diggingDiv ${data[i].query}` );
 
 				const video = $('<video autoplay muted loop></video>');
 				//const source = $(`<source src="video/thumbnail_jiu.mp4" type="video/mp4">`)
