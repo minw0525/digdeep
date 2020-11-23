@@ -288,6 +288,10 @@ video {
     font-weight: 600;
     padding: 0 2.5rem;
 }
+.url span {
+    font-size: var(--font_big);
+    font-weight: 600;
+}
 .description {
     grid-row: 3/4;
 }
