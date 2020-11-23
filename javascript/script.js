@@ -143,13 +143,14 @@ async function initData(data, lang){
 
 
 
+
 // draw initial div in grid-container
 function contentDraw(dataSheet){
 
 	console.log(pageIdx);
 	return new Promise((resolve, reject)=>{
 		//global container
-		const gC = $(".grid-container");
+		const gC = $('.grid-container');
 		gC.empty();
 
 		console.log(dataSheet);
@@ -197,19 +198,19 @@ function contentDraw(dataSheet){
 				item.attr('class', `item booth diggingDiv ${data[i].query}` );
 
 				const video = $('<video autoplay muted loop></video>');
-				//const source = $(`<source src="video/thumbnail_jiu.mp4" type="video/mp4">`)
+				//const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
 				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
 				video.attr('src',`video/thumbnail_jiu.mp4`);
 				//video.append(source);
 				item.append(video);
 
 
-				const wrappingBlock = $("<div></div>");
+				const wrappingBlock = $('<div></div>');
 				wrappingBlock.attr('class', 'wrappingBlock hidden');
 
 				//create childern inside digging booth
-				const thumbnail = $("<img>");
-				const blockTag = $("<div></div>");
+				const thumbnail = $('<img>');
+				const blockTag = $('<div></div>');
 				thumbnail.attr({
 					'src': `image/1.png`,
 					'class': `thumbnail ${data[i].query}Thumbnail`
@@ -221,10 +222,10 @@ function contentDraw(dataSheet){
 				blockTag.attr('class', `blockTag ${data[i].query}`)
 
 				// work link
-				const workLink = $("<a></a>");
+				const workLink = $('<a></a>');
 				workLink.attr('class','spa');
 				if(paramsObj.lang){
-					workLink.attr("href",`./project?student=${data[i].query}&lang=${currLang}`);
+					workLink.attr('href',`./project?student=${data[i].query}&lang=${currLang}`);
 				}else{
 				workLink.attr('href', `./project?student=${data[i].query}`);
 				}
@@ -367,30 +368,30 @@ function contentDraw(dataSheet){
 
 
 // fill content in grid-container
-function contentFill(dataSheet){
+function contentFill(data){
 
 	console.log(pageIdx);
 	return new Promise((resolve, reject)=>{
 		//global container
-		const gC = $(".grid-container");
-		console.log(dataSheet);
+		const gC = $('.grid-container');
+		console.log(data);
 		switch (pageIdx) {
 			case 1: //page index => main
-				mainFill(dataSheet[currLang]);
+				mainFill(data[currLang]);
 				break;
 			case 2: //page index => project
-				projectFill(dataSheet[currLang]);
+				projectFill(data[currLang]);
 				break;
 			case 3: //page index => credit
-				creditFill(dataSheet[currLang]);
+				creditFill(data[currLang]);
 				break;
 			default: alert('wrong page!');
 		}
 
 		//declare filling functions
 		//main page
-		function mainFill(data){
-			function fillMainInfo(data){
+		function mainFill(){
+			function fillMainInfo(){
 				const lexicon = $('.info>p:first-of-type');
 				const keynote = $('.info>p:last-of-type');
 				console.log(currLang);
@@ -418,7 +419,7 @@ function contentFill(dataSheet){
 				})
 			}
 			fillMainInfo(data);
-			fillMainTagText(data);
+			fillMainTagText(dataSheet);
 			return data;
 		}
 
@@ -446,17 +447,17 @@ function contentFill(dataSheet){
 
 			//fill index
 			function indexFill(data){
-				$(".index").empty();
+				$('.index').empty();
 				$.each(data,i=>{
-					let indexLink = $("<a></a>");
+					let indexLink = $('<a></a>');
 					if(paramsObj.lang){
-						indexLink.attr("href","?student="+data[i].query+"&lang="+currLang);
+						indexLink.attr('href','?student='+data[i].query+'&lang='+currLang);
 					}else{
-						indexLink.attr("href","?student="+data[i].query);
+						indexLink.attr('href','?student='+data[i].query);
 					}
-					indexLink.attr("class","spa");
-					$(".index").append(indexLink);
-					indexLink.html("<p>"+data[i].name+"</p>");
+					indexLink.attr('class','spa');
+					$('.index').append(indexLink);
+					indexLink.html('<p>'+data[i].name+'</p>');
 				})
 			}
 
@@ -480,14 +481,14 @@ function contentFill(dataSheet){
 			
 			stickyImageSet(paramsObj.student);
 			renderTxt(data);
-			return pageIdx;
+			return data;
 		}
 
 		//credit page
 		function creditFill(data){
 			return data;
 		}
-		resolve(dataSheet);
+		resolve(data);
 	})
 }
 
