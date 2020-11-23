@@ -42,7 +42,7 @@ div {
     -ms-hyphens: auto;
     hyphens: auto;
 }
-h1 a{
+h1 a {
     font-size: var(--font_big);
     font-weight: 500;
     padding-left: 4rem;
@@ -133,7 +133,7 @@ h2 {
     min-width: 100vw;
     display: grid;
     /*grid-template-columns: repeat(7, 1fr) 160px 160px;*/
-    /*grid-template-columns:
+    grid-template-columns:
         repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr))
         160px 160px; /*for project page test*/
     grid-template-rows: calc(100vh - 60px);
@@ -141,7 +141,7 @@ h2 {
 }
 .item {
     background-color: white;
-    overflow-x: hidden;
+    overflow: hidden scroll;
     //border:1px solid black;
 }
 
@@ -267,11 +267,12 @@ video {
 }
 .personal > :last-child {
     flex: 1 1 70px;
+    overflow-x: scroll;
 }
 .url {
     font-size: var(--font_big);
     font-weight: 600;
-    padding-left: 2.5rem;
+    padding: 0 2.5rem;
 }
 .description {
     grid-row: 3/4;
