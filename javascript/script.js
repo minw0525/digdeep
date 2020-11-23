@@ -488,6 +488,8 @@ function contentFill(data){
 		function creditFill(data){
 			return data;
 		}
+
+		makeMultilingual();
 		resolve(data);
 	})
 }
@@ -612,9 +614,8 @@ function altLang(){
 $(document).on("click", ".altLangOn", altLang)
 
 
-
-$(document).ready(function(e){
-	$(".body").multilingual([
-		'ko', 'en', 'num'
+function makeMultilingual(){
+	$("body").multilingual([
+		'en', 'num'
 	]);
-});
+}
