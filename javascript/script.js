@@ -611,3 +611,10 @@ function altLang(){
 }
 $(document).on("click", ".altLangOn", altLang)
 
+
+
+$(document).ready(function(e){
+	$(".content").multilingual([
+		'ko', 'en', 'num'
+	]);
+});
