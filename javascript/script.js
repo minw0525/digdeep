@@ -25,7 +25,7 @@ function checkUrl(url){
 				);
 			}
 			console.log(paramsObj);
-			if(paramsObg.lang === 'en'){
+			if(paramsObj.lang === 'en'){
 				currLang = paramsObj.lang;
 			}else{
 				currLang = 'ko'
