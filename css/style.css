@@ -308,6 +308,7 @@ video {
     grid-row: 1/5;
     min-width: 160px;
     height: calc(100vh - 60px);
+    text-align: center;
 }
 .index p {
     font-size: calc(var(--font_small) * 0.95);
