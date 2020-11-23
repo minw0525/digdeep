@@ -498,7 +498,8 @@ function changeLangBtn (){
 	$(".en").toggleClass('altLangOn');
 	$(".en").toggleClass('altLangOff');
   }
-  
+
+
 //promise chain
 console.log(url)
 	checkUrl(url)
@@ -513,7 +514,7 @@ initData(dataKO,'ko')
 		mixedData = arrRandomShuffle(data);
 		console.log(mixedData);
 		return mixedData;
-	})//->이걸 깊은 복사로
+	})
 	.then(contentFill)
 	.then(()=>(currLang == 'ko'
 		?($('.ko').addClass('altLangOff'),$('.en').addClass('altLangOn'))
@@ -570,7 +571,8 @@ function arrRandomShuffle(obj){
         [array2[i], array2[j]] = [array2[j], array2[i]];
     }
     console.log(obj);
-    return obj;
+    console.log(copiedObj);
+    return copiedObj;
 }
 
 
