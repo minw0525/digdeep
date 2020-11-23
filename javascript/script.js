@@ -614,7 +614,7 @@ $(document).on("click", ".altLangOn", altLang)
 
 
 $(document).ready(function(e){
-	$(".content").multilingual([
+	$(".body").multilingual([
 		'ko', 'en', 'num'
 	]);
 });
