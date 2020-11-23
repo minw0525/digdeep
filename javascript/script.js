@@ -56,6 +56,7 @@ function checkUrl(url){
 		
 		if(currLang!=='en'){
 			currLang = 'ko';
+			console.log('lang changed');
 		}
 		console.log(getParam());
 		console.log(getFilePath(filePath));
