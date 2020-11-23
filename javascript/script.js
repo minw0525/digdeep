@@ -513,11 +513,9 @@ initData(dataKO,'ko')
 		?($(".ko").addClass('altLangOff'),$(".en").addClass('altLangOn'))
 		:($(".ko").addClass('altLangOn'),$(".en").addClass('altLangOff'))
 	))
-	.then(data=>{
-		console.log(data);
-		return arrRandomShuffle(data)
-	})
 	.catch(console.log)
+	.then(arrRandomShuffle(dataSheet))
+
 
 
 		/*
