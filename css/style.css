@@ -172,6 +172,7 @@ video {
     width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
     width: fill-available;
     padding: 5px;
+    filter: contrast(101%)
 }
 .wrappingBlock {
     min-width: 100%;
