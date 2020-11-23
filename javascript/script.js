@@ -38,12 +38,14 @@ function checkUrl(url){
 		function getFilePath(path){
 			switch (path) {
 				case "/digdeep/":
+				//case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
 
 				case "/digdeep/project":
-					pageIdx = 2;
+				//case '/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/project' :
+				pageIdx = 2;
 					console.log(pageIdx);
 					return pageIdx;
 
@@ -69,7 +71,7 @@ function checkUrl(url){
 
 const removeLang = params => {
 	console.log(url)
-	url = url.replace(langPart,"");
+	url = url.replace(paramReg,"");
 	console.log(url);
 	console.log (pageIdx);
 	window.location.href = url;
@@ -485,7 +487,13 @@ function contentFill(dataSheet){
 }
 
 
-
+function changeLangBtn (){
+	$(".ko").toggleClass('altLangOff');
+	$(".ko").toggleClass('altLangOn');
+	$(".en").toggleClass('altLangOn');
+	$(".en").toggleClass('altLangOff');
+  }
+  
 
 //promise chain
 console.log(url)
@@ -498,7 +506,10 @@ initData(dataKO,'ko')
 	.then(arrRandomShuffle)
 	.then(contentDraw)
 	.then(contentFill)
-	.catch(console.log)
+	.then(()=>(currLang == 'ko'
+		?($(".ko").addClass('altLangOff'),$(".en").addClass('altLangOn'))
+		:($(".ko").addClass('altLangOn'),$(".en").addClass('altLangOff'))
+	))
 
 		/*
 		.then(contentDraw(pageIdx,dataSheet))
@@ -517,7 +528,9 @@ const reFill = function(url){
 	console.log(dataSheet);
 	contentDraw(dataSheet)
 		.then(contentFill)
-		.catch(console.log)
+		.then(()=>{
+			changeLangBtn();
+		})
 }
 
 
@@ -554,3 +567,37 @@ function arrRandomShuffle(obj){
     console.log(obj);
     return obj;
 }
+
+
+//lang btn onclick event;
+const langBtn = $(".altLangOn");
+function altLang(){
+  console.log(currLang);
+  if(currLang === "ko"){
+    url = window.location.href;
+    currLang = "en";
+    if(url.paramReg){
+      url = url.replace(paramReg,"?lang=en");
+    }else{
+      url = url.concat("?lang=en")
+    }
+    console.log(url);
+    history.pushState('ko',"", url);
+    let href = window.location.search;
+    console.log(href);
+    reFill(href);
+    console.log(dataSheet);
+  }else if(currLang === "en"){
+    url = window.location.href;
+    currLang = "ko";
+    url = url.replace(paramReg,"");
+    console.log(url);
+    history.pushState('en',"", url);
+    let href = window.location.search;
+    console.log(href);
+    reFill(href);
+    console.log(dataSheet);
+  }
+}
+$(document).on("click", ".altLangOn", altLang)
+
