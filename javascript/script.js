@@ -581,31 +581,32 @@ function arrRandomShuffle(obj){
 }
 
 
-
 //lang btn onclick event;
-const langBtn = $(".altLangOn");
+const langBtn = $('.altLangOn');
 function altLang(){
 	console.log(currLang);
-	if(currLang === "ko"){
+	if(currLang === 'ko'){
 		url = window.location.href;
-		currLang = "en";
+		currLang = 'en';
 		if(paramsObj.student){
-			url = url.concat("&lang=en");
+			url = url.concat('&lang=en');
 		}else{
-			url = url.concat("?lang=en")
+			url = url.concat('?lang=en')
 		}
 		console.log(url);
-		history.pushState(url,"", url);
+		history.pushState(url,'', url);
+		$('html').attr('lang', currLang)
 		let href = window.location.search;
 		console.log(href);
 		reFill(href);
 		console.log(dataSheet);
-	}else if(currLang === "en"){
+	}else if(currLang === 'en'){
 		url = window.location.href;
-		currLang = "ko";
-		url = url.replace(langPart,"");
+		currLang = 'ko';
+		url = url.replace(langPart,'');
 		console.log(url);
-		history.pushState(url,"", url);
+		history.pushState(url,'', url);
+		$('html').attr('lang', currLang)
 		let href = window.location.search;
 		console.log(href);
 		reFill(href);
@@ -613,7 +614,7 @@ function altLang(){
 	}
 	changeLangBtn();
 }
-$(document).on("click", ".altLangOn", altLang)
+$(document).on('click', '.altLangOn', altLang)
 
 
 function makeMultilingual(){
