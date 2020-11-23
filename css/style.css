@@ -246,7 +246,7 @@ video {
     padding: 0 4rem;
     display: flex;
     justify-content: space-between;
-    min-width: 400px;
+    min-width: 450px;
     width: calc(100% - 8rem);
     gap: 2rem;
 }
