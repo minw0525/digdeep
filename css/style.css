@@ -277,7 +277,7 @@ video {
     grid-row: 3/4;
 }
 .descrBox {
-    padding: 1.6rem 2.5rem 0 2.5rem;
+    padding: 1.6rem 2.5rem 3.5rem 2.5rem;
 }
 .description p {
     font-size: calc(var(--font_small) * 0.95);
