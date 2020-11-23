@@ -4,7 +4,7 @@
     /*size*/
     --min_gap: 15px;
     /*font*/
-    --font_family: covik sans mono, '아리따-돋움(OTF)', Roboto, sans-serif;
+    --font_family: covik-sans-mono, '아리따-돋움(OTF)', Roboto, sans-serif;
     --font_big: 3rem;
     --font_mid: 2rem;
     --font_small: 1.7rem;
