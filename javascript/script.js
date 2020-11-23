@@ -595,7 +595,6 @@ function altLang(){
 		}
 		console.log(url);
 		history.pushState(url,'', url);
-		$('html').attr('lang', currLang)
 		let href = window.location.search;
 		console.log(href);
 		reFill(href);
@@ -606,13 +605,13 @@ function altLang(){
 		url = url.replace(langPart,'');
 		console.log(url);
 		history.pushState(url,'', url);
-		$('html').attr('lang', currLang)
 		let href = window.location.search;
 		console.log(href);
 		reFill(href);
 		console.log(dataSheet);
 	}
 	changeLangBtn();
+	$('html').attr('lang', currLang)
 }
 $(document).on('click', '.altLangOn', altLang)
 
