@@ -499,7 +499,6 @@ function changeLangBtn (){
 	$(".en").toggleClass('altLangOff');
   }
   
-
 //promise chain
 console.log(url)
 	checkUrl(url)
@@ -514,7 +513,7 @@ initData(dataKO,'ko')
 		mixedData = arrRandomShuffle(data);
 		console.log(mixedData);
 		return mixedData;
-	})
+	})//->이걸 깊은 복사로
 	.then(contentFill)
 	.then(()=>(currLang == 'ko'
 		?($('.ko').addClass('altLangOff'),$('.en').addClass('altLangOn'))
@@ -549,11 +548,11 @@ $(window).bind('popstate', function() {
 });
 
 // a tag onclick pushstate event
-$(document).on("click", "a.spa", function(e) {
-	e.preventDefault();
-	let href = $(this).attr("href");
+$(document).on('click', 'a.spa', function(e) {
+	//e.preventDefault();
+	let href = $(this).attr('href');
 	console.log(href);
-	history.pushState(href,"", href);
+	history.pushState(href,'', href);
 	url = window.location.href;
 
 	reFill(url);
@@ -562,8 +561,9 @@ $(document).on("click", "a.spa", function(e) {
 
 // shuffle array randomly
 function arrRandomShuffle(obj){
-    const array1 = obj["ko"];
-    const array2 = obj["en"];
+	const copiedObj = JSON.parse(JSON.stringify(obj));
+    const array1 = obj['ko'];
+    const array2 = obj['en'];
     for (let i = array1.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array1[i], array1[j]] = [array1[j], array1[i]];
@@ -572,6 +572,7 @@ function arrRandomShuffle(obj){
     console.log(obj);
     return obj;
 }
+
 
 
 //lang btn onclick event;
