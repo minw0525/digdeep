@@ -253,6 +253,9 @@ video {
     padding-top: calc(var(--min_gap) / 2);
     margin-left: 2rem;
     text-indent: -2rem;
+}
+.about > .info > p:first-of-type span,
+.about > .info > p:nth-of-type(2) span {
     font-style: italic;
 }
 .about > .info > p:nth-of-type(2) {
