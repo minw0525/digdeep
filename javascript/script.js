@@ -198,9 +198,9 @@ function contentDraw(dataSheet){
 				item.attr('class', `item booth diggingDiv ${data[i].query}` );
 
 				const video = $('<video autoplay muted loop></video>');
-				//const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
+				const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
 				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
-				video.attr('src',`video/thumb_kyuntae_250.mp4`);
+				//video.attr('src',`video/thumb_kyuntae_250.mp4`);
 				//video.append(source);
 				item.append(video);
 
