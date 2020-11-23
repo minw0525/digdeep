@@ -508,23 +508,20 @@ console.log(url)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
 	.then(contentDraw)
+	.then(data=>{
+		console.log(data);
+		mixedData = arrRandomShuffle(data);
+		console.log(mixedData);
+		return mixedData;
+	})
 	.then(contentFill)
 	.then(()=>(currLang == 'ko'
-		?($(".ko").addClass('altLangOff'),$(".en").addClass('altLangOn'))
-		:($(".ko").addClass('altLangOn'),$(".en").addClass('altLangOff'))
+		?($('.ko').addClass('altLangOff'),$('.en').addClass('altLangOn'))
+		:($('.ko').addClass('altLangOn'),$('.en').addClass('altLangOff'))
 	))
 	.catch(console.log)
-	.then(arrRandomShuffle(dataSheet))
 
 
-
-		/*
-		.then(contentDraw(pageIdx,dataSheet))
-		.then(()=>{
-			console.log(paramsObj);
-			console.log(currLang);
-			console.log(pageIdx);
-		})*/
 
 
 const reFill = function(url){
@@ -533,8 +530,9 @@ const reFill = function(url){
 			if(p.lang) {removeLang(p)}
 	 	})
 	console.log(dataSheet);
+
 	contentDraw(dataSheet)
-		.then(contentFill)
+		.then(contentFill(mixedData))
 		.catch(console.log)
 		
 }
