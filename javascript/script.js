@@ -95,6 +95,7 @@ async function initData(data, lang){
 			request.onload = function() {
 					let gSheet = JSON.parse(request.responseText);
 					entry = gSheet['feed']['entry'];
+					console.log(entry);
 					resolve(entry);
 			}
 		});
