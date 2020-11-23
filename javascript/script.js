@@ -508,16 +508,15 @@ console.log(url)
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
 	.then(contentDraw)
-	.then(data=>{
-		console.log(data);
-		//return arrRandomShuffle(data)
-		return data;
-	})
 	.then(contentFill)
 	.then(()=>(currLang == 'ko'
 		?($(".ko").addClass('altLangOff'),$(".en").addClass('altLangOn'))
 		:($(".ko").addClass('altLangOn'),$(".en").addClass('altLangOff'))
 	))
+	.then(data=>{
+		console.log(data);
+		return arrRandomShuffle(data)
+	})
 	.catch(console.log)
 
 
