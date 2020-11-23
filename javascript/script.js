@@ -579,7 +579,7 @@ function altLang(){
 		url = window.location.href;
 		currLang = "en";
 		if(langPart.exec(url)){
-		url = url.concat(langPart,"&lang=en");
+		url = url.replace(langPart,"&lang=en");
 		}else{
 		url = url.concat("?lang=en")
 		}
