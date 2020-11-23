@@ -25,7 +25,11 @@ function checkUrl(url){
 				);
 			}
 			console.log(paramsObj);
-			currLang = paramsObj.lang;
+			if(paramsObg.lang === 'en'){
+				currLang = paramsObj.lang;
+			}else{
+				currLang = 'ko'
+			}
 			return paramsObj;
 		}
 
@@ -54,10 +58,6 @@ function checkUrl(url){
 			}
 		}
 		
-		if(currLang!=='en'){
-			currLang = 'ko';
-			console.log('lang changed');
-		}
 		console.log(getParam());
 		console.log(getFilePath(filePath));
 		console.log(currLang);
