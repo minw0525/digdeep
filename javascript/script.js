@@ -488,11 +488,10 @@ function contentFill(dataSheet){
 
 //promise chain
 console.log(url)
-checkUrl(url)
-	.then(p=>{
-		p.lang ? removeLang(p) : keepLang(p)
-		}
-	)
+	checkUrl(url)
+		.then(p=>{
+			if(p.lang) {removeLang(p)}
+	 	})
 initData(dataKO,'ko')
 	.then(()=>initData(dataEN,'en'))
 	.then(arrRandomShuffle)
