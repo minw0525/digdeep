@@ -510,6 +510,8 @@ initData(dataKO,'ko')
 		?($(".ko").addClass('altLangOff'),$(".en").addClass('altLangOn'))
 		:($(".ko").addClass('altLangOn'),$(".en").addClass('altLangOff'))
 	))
+	.catch(console.log)
+
 
 		/*
 		.then(contentDraw(pageIdx,dataSheet))
@@ -528,9 +530,8 @@ const reFill = function(url){
 	console.log(dataSheet);
 	contentDraw(dataSheet)
 		.then(contentFill)
-		.then(()=>{
-			changeLangBtn();
-		})
+		.catch(console.log)
+		
 }
 
 
@@ -572,32 +573,33 @@ function arrRandomShuffle(obj){
 //lang btn onclick event;
 const langBtn = $(".altLangOn");
 function altLang(){
-  console.log(currLang);
-  if(currLang === "ko"){
-    url = window.location.href;
-    currLang = "en";
-    if(paramReg.exec(url)[0]){
-      url = url.replace(paramReg,"&lang=en");
-    }else{
-      url = url.concat("?lang=en")
-    }
-    console.log(url);
-    history.pushState(url,"", url);
-    let href = window.location.search;
-    console.log(href);
-    reFill(href);
-    console.log(dataSheet);
-  }else if(currLang === "en"){
-    url = window.location.href;
-    currLang = "ko";
-    url = url.replace(paramReg,"");
-    console.log(url);
-    history.pushState(url,"", url);
-    let href = window.location.search;
-    console.log(href);
-    reFill(href);
-    console.log(dataSheet);
-  }
+	console.log(currLang);
+	if(currLang === "ko"){
+		url = window.location.href;
+		currLang = "en";
+		if(paramReg.exec(url)){
+		url = url.concat(paramReg,"&lang=en");
+		}else{
+		url = url.concat("?lang=en")
+		}
+		console.log(url);
+		history.pushState(url,"", url);
+		let href = window.location.search;
+		console.log(href);
+		reFill(href);
+		console.log(dataSheet);
+	}else if(currLang === "en"){
+		url = window.location.href;
+		currLang = "ko";
+		url = url.replace(paramReg,"");
+		console.log(url);
+		history.pushState(url,"", url);
+		let href = window.location.search;
+		console.log(href);
+		reFill(href);
+		console.log(dataSheet);
+	}
+	changeLangBtn();
 }
 $(document).on("click", ".altLangOn", altLang)
 
