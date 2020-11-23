@@ -200,7 +200,7 @@ function contentDraw(dataSheet){
 				const video = $('<video autoplay muted loop></video>');
 				//const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
 				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
-				video.attr('src',`video/thumbnail_jiu.mp4`);
+				video.attr('src',`video/thumb_kyuntae_250.mp4`);
 				//video.append(source);
 				item.append(video);
 
