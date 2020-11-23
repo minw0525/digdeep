@@ -187,6 +187,7 @@ function contentDraw(dataSheet){
 			title.text('Dig deep');
 			const p1 = $('<p></p>');
 			const p2 = $('<p></p>');
+			const p3 = $('<p></p>');
 			const last = $('<h2></h2>');
 			last.text('dig deep.');
 
@@ -246,7 +247,7 @@ function contentDraw(dataSheet){
 
 				gC.append(about);
 				about.append(info);
-				info.append(title, p1, p2, last);
+				info.append(title, p1, p2, p3, last);
 
 				item.append(wrappingBlock);
 				wrappingBlock.append(thumbnail, workLink);
@@ -392,19 +393,22 @@ function contentFill(data){
 		//main page
 		function mainFill(){
 			function fillMainInfo(){
-				const lexicon = $('.info>p:first-of-type');
+				const lexicon1 = $('.info>p:first-of-type');
+				const lexicon2 = $('.info>p:nth-of-type(2)');
 				const keynote = $('.info>p:last-of-type');
 				console.log(currLang);
 				switch (currLang){
 					case 'ko':
 					console.log(lexicon);
-					lexicon.html('1. (무엇을 알아내기 위해) 깊이 파고들다<br>2. (장비 따위의) 필요한 것을 찾기 위해 노력하다.');
+					lexicon1.html('1. (무엇을 알아내기 위해) 깊이 파고들다.');					
+					lexicon2.html('2. (장비 따위의) 필요한 것을 찾기 위해 노력하다.');
 					keynote.html('2020년, 준비를 마친 인부들이 이동을 시작했다.<br>오프라인에서 온라인으로, 전신의 움직임에서 손가락의 작은 움직임으로, 땅 위에서 픽셀 위로….<br>수많은 변화 속에서 그들은 존재를 지속할 수 있는 무언가를 찾아 나섰다. 각자가 속한 그리드와 픽셀 위에서, 28명의 인부들은 삽을 들고 더 깊은 아래를 향해 웹 속을 파고든다. 그 끝에 발굴해낸 새로운 가능성과 존재의 조각이 궁금하다면,')
 					break;
 					case 'en':
 					console.log(keynote);
-					lexicon.html('1. search thoroughly for information<br>2. try hard to provide the money, equipment, etc.');
-					keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online, from full-body movement to small finger movements, from the ground to pixels above...<br>Amidst a multitude of changes,they longed to find that “something” (or quality) that will rest immortally. On top of the grid and pixels to which they correspond, twenty-eight members hold a shovel to dig deeper into the web. If you are curious about the new possibilities and pieces unearthed,');
+					lexicon1.html('1. search thoroughly for information');
+					lexicon2.html('2. try hard to provide the money, equipment, etc.');
+					keynote.html('In 2020, after extensive preparation, workers began to move.<br>From offline to online, from full-body movement to small finger movements, from the ground to pixels above...<br>Amidst a multitude of changes, they longed to find that “something” (or quality) that will rest immortally. On top of the grid and pixels to which they correspond, twenty-eight members hold a shovel to dig deeper into the web. If you are curious about the new possibilities and pieces unearthed,');
 					break;
 				}
 			}
