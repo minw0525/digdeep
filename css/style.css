@@ -66,6 +66,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     min-width: 768px;
+    cursor: url('../cursor.png'), url('../cursor.cur'), auto;    
 }
 
 /*initial typography setting */
@@ -78,6 +79,13 @@ div {
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
+}
+a {
+    cursor: url('../cursorPointer.png'), pointer;
+}
+a:link,
+a:visited {
+    color: black;
 }
 h1 a {
     font-size: var(--font_big);
