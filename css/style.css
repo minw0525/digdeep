@@ -188,9 +188,10 @@ h2 * {
 }
 .item {
     background-color: white;
+    overflow: hidden;
 }
 .item:hover {
-    overflow: auto;
+    overflow: auto !important;
 }
 
 
