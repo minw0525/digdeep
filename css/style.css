@@ -188,8 +188,11 @@ h2 * {
 }
 .item {
     background-color: white;
-    overflow: hidden scroll;
 }
+.item:hover {
+    overflow: auto;
+}
+
 
 /* main page style*/
 .jail {
