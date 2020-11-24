@@ -19,6 +19,37 @@
 				window.location.replace("/mobile.html");
 			}else console.log('not mobile')
 		</script>
+		<style>
+		      @keyframes loadingshovel {
+			to {
+			      background-position: -4100px 0;
+			  }
+		      }
+		      #loadingBox{
+			position : fixed;
+			width : 100vw;
+			height : 100vh;
+			background: white;
+			z-index: 100;
+			transition: opacity 0.5s;
+
+		      }
+		      .loading {
+			position: absolute;
+			left:0;
+			right:0;
+			margin-left:auto;
+			margin-right:auto;
+			top: 0;
+			bottom:0;
+			margin-top:auto;
+			margin-bottom:auto;
+			width: 410px;
+			height: 416px;
+			background: url('loading.png') no-repeat 0 0 / cover;
+			animation: loadingshovel 2s infinite steps(10);
+		      }
+	</style>
   	</head>
   	<body>
 		<div class="header">
@@ -61,5 +92,11 @@
       <div class="index item"></div>-->
     </div>
 	<script defer src="javascript/jquery.multilingual.min.js"></script>
+	<script>
+		window.load = setTimeout(loading,3000);
+		function loading(){
+			document.querySelector('#loadingBox').style.opacity=0;
+		}
+	</script>
   </body>
 </html>
