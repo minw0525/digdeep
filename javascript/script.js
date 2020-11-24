@@ -198,14 +198,6 @@ function contentDraw(dataSheet){
 				const item = $('<div></div>');
 				item.attr('class', `item booth diggingDiv ${data[i].query}` );
 
-				const video = $('<video autoplay muted loop></video>');
-				const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
-				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
-				//video.attr('src',`video/thumb_kyuntae_250.mp4`);
-				video.append(source);
-				item.append(video);
-
-
 				const wrappingBlock = $('<div></div>');
 				wrappingBlock.attr('class', 'wrappingBlock hidden');
 
@@ -422,6 +414,24 @@ function contentFill(data){
 			}
 			fillMainInfo(data);
 			fillMainTagText(dataSheet[currLang]);
+			
+			//fill video in booth
+			let boothList = Array.prototype.slice.call($('.booth'))
+			boothList.map(v=>{
+				let i = boothList.indexOf(v);
+				const video = document.createElement('video');
+				Object.assign(video, {
+					autoplay: true,
+					muted: true,
+					loop: true,
+					src: 'video/thumbnail_jiu.mp4',
+					type: 'video/mp4'
+				  })
+				//$('<video autoplay muted loop></video>');
+				//const source = $(`<source src='video/thumbnail_${dataSheet[currLang][i].query}.mp4' type='video/mp4'>`)
+				v.prepend(video);
+			})
+		
 			return data;
 		}
 
