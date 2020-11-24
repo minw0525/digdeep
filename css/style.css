@@ -188,11 +188,13 @@ h2 * {
 }
 .item {
     background-color: white;
-    overflow: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
-.item:hover {
-    overflow: auto !important;
-}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.item::webkit-scrollbar{
+    display: none;
+}    
 
 
 /* main page style*/
