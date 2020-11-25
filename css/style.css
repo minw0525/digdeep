@@ -168,7 +168,7 @@ h2 * {
     padding: 0 0.5rem;
 }
 .altLangOn {
-    cursor: pointer;
+    cursor: url('../image/cursorPointer.png'), pointer;
     opacity: 0.2;
 }
 .altLangOn:hover {
