@@ -541,6 +541,9 @@ video {
 .generalInfo > .div0 > p:nth-of-type(2) span {
     font-style: italic;
 }
+.generalInfo > .div0 > p:nth-of-type(2) {
+    padding-top: 0;
+}
 .generalInfo > div p {
     font-size: calc(var(--font_small) * 0.85);
     font-weight: 600;
