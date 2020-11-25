@@ -65,7 +65,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     min-width: 768px;
-    cursor: url('../cursor.png'), url('../cursor.cur'), auto;
+    cursor: url('../image/cursor.png'), url('../image/cursor.cur'), auto;
 }
 
 /*initial typography setting */
@@ -80,7 +80,7 @@ div {
     hyphens: auto;
 }
 a {
-    cursor: url('../cursorPointer.png'), pointer;
+    cursor: url('../image/cursorPointer.png'), pointer;
     text-decoration: none;
 }
 a:link,
