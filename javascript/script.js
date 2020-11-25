@@ -626,7 +626,7 @@ function contentFill(data){
 					$('.index').append(indexLink);
 					indexLink.html('<p>'+data[i].name+'</p>');
 					if(data[i].query === paramsObj.student){
-						indexLink.attr('class', 'highlightOn');
+						indexLink.attr('class', 'highlightOn')
 					}
 				})
 			}
