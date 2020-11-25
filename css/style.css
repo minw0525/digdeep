@@ -237,7 +237,7 @@ video {
 .wrappingBlock {
     min-width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     position: relative;
     left: -100%;
 }
@@ -249,14 +249,18 @@ video {
 }
 .thumbnail {
     width: 100%;
+    z-index: 1;
+    height: 100%;
     flex: 1 1 60%;
+    position: absolute;
     background: rgba(0, 0, 0, 0.8);
-    border: 0;
 }
 .blockTag {
     width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
     background: white;
-    flex: 1 1 40%;
     border-top: 1px solid black;
     display: flex;
     flex-direction: column-reverse;
@@ -266,14 +270,21 @@ video {
     padding: 3px 7px;
 }
 .blockTag * {
-    font-size: var(--font_small);
+    font-size: calc(var(--font_mid) * 0.95);
 }
 .blockTag > .title {
+    line-height: 1.47;
+}
+.blockTag .ml-en,
+.blockTag .ml-num {
+    font-size: var(--font_mid);
+    line-height: 1.33;
 }
 .blockTag > .nameBlock {
     padding-top: 7px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 /*main-side pannel style*/
 .about {
