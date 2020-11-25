@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>Dig Deep: 2020</title>
-    <link rel="stylesheet" href="https://use.typekit.net/ehy7syo.css">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>Dig Deep: 2020</title>
+		<link rel="stylesheet" href="https://use.typekit.net/ehy7syo.css">
 		<link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script defer src="javascript/script.js"></script>
 		<script>
 			let isMobile = false; //initiate as false
@@ -18,47 +18,46 @@
 			if(isMobile){
 				window.location.replace("/mobile.html");
 			}else console.log('not mobile')
-    </script>
-    <style>
-      @keyframes spaceship-ani {
-        to {
-              background-position: -4100px 0;
-          }
-      }
-      #loadingBox{
-        position : fixed;
-        width : 100vw;
-        height : 100vh;
-        background: white;
-        z-index: 100;
-        transition: opacity 0.5s;
-
-      }
-      .loading {
-        position: absolute;
-        left:0;
-        right:0;
-        margin-left:auto;
-        margin-right:auto;
-        top: 0;
-        bottom:0;
-        margin-top:auto;
-        margin-bottom:auto;
-        width: 410px;
-        height: 416px;
-        background: url('image/loading.png') no-repeat 0 0 / cover;
-        animation: spaceship-ani 2s infinite steps(10);
-      }
-    </style>
-  </head>
-  <body>
-    <div id="loadingBox">
-      <div class="loading"></div>
-    </div>
+		</script>
+		<style>
+			@keyframes spaceship-ani {
+				to {
+					background-position: -4100px 0;
+				}
+			}
+			#loadingBox{
+				position : fixed;
+				width : 100vw;
+				height : 100vh;
+				background: white;
+				z-index: 100;
+				transition: opacity 0.5s;
+			}
+			.loading {
+				position: absolute;
+				left:0;
+				right:0;
+				margin-left:auto;
+				margin-right:auto;
+				top: 0;
+				bottom:0;
+				margin-top:auto;
+				margin-bottom:auto;
+				width: 410px;
+				height: 416px;
+				background: url('image/loading.png') no-repeat 0 0 / cover;
+				animation: spaceship-ani 2s infinite steps(10);
+		}
+		</style>
+	</head>
+	<body>
+		<div id="loadingBox">
+			<div class="loading"></div>
+		</div>
 		<div class="header">
 			<div class="logo">
 				<h1 class="item"><a href="../digdeep/" class="spa">Dig Deep</a></h1>
-      </div>
+			</div>
 			<div class="addon">
 				<span class="credit item"><a href="./credit" class="spa">Credit</a></span>
 				<span class="altLang item">
@@ -66,15 +65,14 @@
 				</span>
 			</div>
 		</div>
-    </div>
-    <div class="grid-container">
-    </div>
-    <script defer src="javascript/jquery.multilingual.min.js"></script>
-    <script>
-      window.load = setTimeout(loading,3000);
-      function loading(){
-          document.querySelector('#loadingBox').style.visibility='hidden';
-        }
-    </script>
-  </body>
+		<div class="grid-container">
+		</div>
+		<script defer src="javascript/jquery.multilingual.min.js"></script>
+		<script>
+			window.load = setTimeout(loading,3000);
+				function loading(){
+				document.querySelector('#loadingBox').style.visibility='hidden';
+			}
+		</script>
+	</body>
 </html>
