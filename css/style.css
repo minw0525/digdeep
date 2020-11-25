@@ -34,7 +34,6 @@
         url('../webfont/AritaDotumBold.eot') format('embedded-opentype');
 }
 
-
 :root {
     /*color*/
     --blue: #0909d1;
@@ -66,7 +65,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     min-width: 768px;
-    cursor: url('../image/cursor.png'), url('../cursor.cur'), auto;    
+    cursor: url('../cursor.png'), url('../cursor.cur'), auto;
 }
 
 /*initial typography setting */
@@ -81,7 +80,8 @@ div {
     hyphens: auto;
 }
 a {
-    cursor: url('../image/cursorPointer.png'), pointer;
+    cursor: url('../cursorPointer.png'), pointer;
+    text-decoration: none;
 }
 a:link,
 a:visited {
@@ -91,7 +91,6 @@ h1 a {
     font-size: var(--font_big);
     font-weight: 500;
     padding-left: 4rem;
-    text-decoration: none;
 }
 h1 a span {
     font-size: var(--font_big) !important;
@@ -105,7 +104,7 @@ h2 * {
 .header {
     width: 100vw;
     display: grid;
-    grid-template-columns: auto 160px 160px;
+    grid-template-columns: auto 170px 170px;
     min-width: 100vw;
     gap: 2px;
     height: 60px;
@@ -186,10 +185,10 @@ h2 * {
     justify-content: center;
     min-width: 100vw;
     display: grid;
-    /*grid-template-columns: repeat(7, 1fr) 160px 160px;*/
+    /*grid-template-columns: repeat(7, 1fr) 170px 170px;*/
     grid-template-columns:
         repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr))
-        160px 160px; /*for project page test*/
+        170px 170px; /*for project page test*/
     grid-template-rows: calc(100vh - 60px);
     gap: 2px;
     border-top: 1px solid black;
@@ -197,14 +196,13 @@ h2 * {
 .item {
     background-color: white;
     overflow: auto;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
-.item::-webkit-scrollbar{
+.item::-webkit-scrollbar {
     display: none;
-}    
-
+}
 
 /* main page style*/
 .jail {
@@ -291,7 +289,7 @@ video {
     color: var(--blue);
 }
 .about > .info p {
-    padding-top: calc(var(--min_gap)*2);
+    padding-top: calc(var(--min_gap) * 2);
     font-size: calc(var(--font_small) * 0.85);
     font-weight: 600;
     line-height: 1.85;
@@ -390,7 +388,7 @@ video {
 .index {
     grid-column: 10/11;
     grid-row: 1/5;
-    min-width: 160px;
+    min-width: 170px;
     height: calc(100vh - 60px);
     text-align: center;
 }
@@ -408,4 +406,130 @@ video {
     content: '';
     display: block;
     height: 1rem;
+}
+
+/*creidt page style*/
+.teamList {
+    grid-column: 1/9;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
+    grid-template-rows: repeat(4, minmax(100px, 1fr));
+    gap: 2px;
+    overflow-x: auto;
+}
+.selectInfo {
+    grid-column: 9/11;
+    min-width: 320px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+}
+.personalInfo {
+    grid-row: 1/2;
+}
+.personalImg {
+    grid-row: 2/3;
+    position: relative;
+}
+.personalImg > * {
+    position: absolute;
+    top: 0;
+}
+.touchMe {
+    margin: auto;
+    text-align: center;
+    position: relative;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%) rotate(-30deg);
+}
+.touchMe,
+.touchMe span {
+    color: var(--blue);
+    font-size: var(--font_big);
+    font-weight: 600;
+}
+.planning {
+    grid-column: 1/2;
+}
+.art {
+    grid-column: 2/3;
+}
+.web {
+    grid-column: 3/4;
+}
+.media {
+    grid-column: 4/5;
+}
+.teamBox {
+    grid-row: 1/4;
+    display: flex;
+    flex-direction: column;
+}
+.teamBox > * {
+    margin: 2.5rem 4rem;
+}
+.teamName,
+.teamName > span {
+    font-size: var(--font_small);
+    font-weight: 700;
+}
+.generalInfo {
+    grid-column: 1/5;
+    grid-row: 4/5;
+    display: flex;
+}
+.generalInfo::after {
+    content: '';
+    display: block;
+    width: 4rem;
+}
+.generalInfo > div {
+    flex: 1 1 25%;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 0 3rem 4rem;
+}
+.generalInfo > div:nth-of-type(2) {
+    flex: 1 1 50%;
+}
+.generalInfo > .div0 > p:first-of-type,
+.generalInfo > .div0 > p:nth-of-type(2) {
+    padding-top: calc(var(--min_gap) / 2);
+    margin-left: 2rem;
+    text-indent: -2rem;
+}
+.generalInfo > .div0 > p:first-of-type span,
+.generalInfo > .div0 > p:nth-of-type(2) span {
+    font-style: italic;
+}
+.generalInfo > div p {
+    font-size: calc(var(--font_small) * 0.85);
+    font-weight: 600;
+    line-height: 1.85;
+}
+.generalInfo > div p span {
+    font-size: calc(var(--font_small) * 0.95);
+    font-weight: 500;
+    line-height: 1.5;
+}
+.generalInfo > .div2 {
+    justify-content: space-between;
+}
+.generalInfo > .div2 > div {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+.duty {
+    font-size: var(--font_small);
+}
+.duty span {
+    font-size: var(--font_small);
+}
+.generalInfo > .div2 > div .name {
+    font-size: var(--font_big);
+}
+.generalInfo > .div2 > div .name span {
+    font-size: var(--font_big);
 }
