@@ -350,6 +350,7 @@ video {
 .url span {
     font-size: var(--font_big);
     font-weight: 600;
+    hyphens: none;
 }
 .description {
     grid-row: 3/4;
@@ -430,6 +431,7 @@ video {
     flex-direction: column;
     justify-content: space-evenly;
     padding: 2.5rem 4.5rem;
+    color: var(--blue);
 }
 .infoWrapper {
     position: relative;
@@ -500,12 +502,9 @@ video {
     display: flex;
     flex-wrap: wrap;
 }
-.teamBox .duty {
-    margin-bottom: 0.4rem;
-}
 .teamBox > div > .creditName {
     flex: 1 1 33%;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0 0;
 }
 .teamName,
 .teamName > span {
@@ -530,6 +529,7 @@ video {
 }
 .generalInfo > div:nth-of-type(2) {
     flex: 1 1 50%;
+    height: fit-content;
 }
 .generalInfo > .div0 > p:first-of-type,
 .generalInfo > .div0 > p:nth-of-type(2) {
@@ -547,15 +547,29 @@ video {
 .generalInfo > div p {
     font-size: calc(var(--font_small) * 0.85);
     font-weight: 600;
-    line-height: 1.85;
+    line-height: 1.8;
 }
 .generalInfo > div p span {
     font-size: calc(var(--font_small) * 0.95);
     font-weight: 500;
     line-height: 1.5;
 }
+.generalInfo > .div0 {
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    top: 0;
+}
 .generalInfo > .div2 {
     justify-content: space-between;
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    top: 0;
 }
 .generalInfo > .div2 > div {
     display: flex;
@@ -574,19 +588,13 @@ video {
     font-size: var(--font_mid);
 }
 .creditName span {
-    font-size: var(--font_mid);
+    font-size: calc(var(--font_mid) * 1.2);
+    font-weight: 500;
 }
 .highlightOn {
-    text-decoration: underline;
-    color: var(--blue);
-}
-.highlightOn span {
-    text-decoration: underline;
-    color: var(--blue);
-}
-.underLine {
     text-decoration: underline wavy;
     text-decoration-thickness: from-font;
     text-decoration-skip-ink: none;
     text-underline-offset: 0.4rem;
+    color: var(--blue) !important;
 }
