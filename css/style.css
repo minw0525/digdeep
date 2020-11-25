@@ -65,7 +65,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     min-width: 768px;
-    cursor: url('../image/cursor.png'), url('../image/cursor.cur'), auto;
+    cursor: url('../cursor.png'), url('../cursor.cur'), auto;
 }
 
 /*initial typography setting */
@@ -80,7 +80,7 @@ div {
     hyphens: auto;
 }
 a {
-    cursor: url('../image/cursorPointer.png'), pointer;
+    cursor: url('../cursorPointer.png'), pointer;
     text-decoration: none;
 }
 a:link,
@@ -168,7 +168,7 @@ h2 * {
     padding: 0 0.5rem;
 }
 .altLangOn {
-    cursor: url('../image/cursorPointer.png'), pointer;
+    cursor: pointer;
     opacity: 0.2;
 }
 .altLangOn:hover {
@@ -195,14 +195,12 @@ h2 * {
 }
 .item {
     background-color: white;
-}
-.item, .jail{
-     overflow: auto;
+    overflow: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
-.item::-webkit-scrollbar, .jail::-webkit-scrollbar {
+.item::-webkit-scrollbar {
     display: none;
 }
 
@@ -428,6 +426,33 @@ video {
 }
 .personalInfo {
     grid-row: 1/2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2.5rem 4.5rem;
+}
+.infoWrapper {
+    position: relative;
+    flex: 1 1 auto;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+.infoWrapper:nth-child(2) {
+    display: block;
+}
+.infoWrapper span {
+    font-size: var(--font_mid);
+    padding-right: 1rem;
+}
+.infoWrapper span {
+    font-size: var(--font_mid);
+}
+.infoWrapper > span:nth-of-type(3) {
+    font-weight: 700;
+}
+.infoWrapper > span:nth-of-type(3) span {
+    font-weight: 700;
 }
 .personalImg {
     grid-row: 2/3;
@@ -442,8 +467,7 @@ video {
     text-align: center;
     position: relative;
     display: block;
-    top: 50%;
-    transform: translateY(-50%) rotate(-30deg);
+    transform: rotate(-30deg);
 }
 .touchMe,
 .touchMe span {
@@ -469,7 +493,19 @@ video {
     flex-direction: column;
 }
 .teamBox > * {
-    margin: 2.5rem 4rem;
+    margin: 2.5rem 0 0 4rem;
+    font-weight: 600;
+}
+.teamBox > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.teamBox .duty {
+    margin-bottom: 0.4rem;
+}
+.teamBox > div > .creditName {
+    flex: 1 1 33%;
+    margin: 0.5rem 0;
 }
 .teamName,
 .teamName > span {
@@ -524,14 +560,30 @@ video {
     text-align: right;
 }
 .duty {
-    font-size: var(--font_small);
+    font-size: calc(var(--font_small) * 0.85);
+    font-weight: 500;
+    width: 100%;
 }
 .duty span {
-    font-size: var(--font_small);
+    font-size: calc(var(--font_small) * 0.95);
 }
-.generalInfo > .div2 > div .name {
-    font-size: var(--font_big);
+.creditName {
+    font-size: var(--font_mid);
 }
-.generalInfo > .div2 > div .name span {
-    font-size: var(--font_big);
+.creditName span {
+    font-size: var(--font_mid);
+}
+.highlightOn {
+    text-decoration: underline;
+    color: var(--blue);
+}
+.highlightOn span {
+    text-decoration: underline;
+    color: var(--blue);
+}
+.underLine {
+    text-decoration: underline wavy;
+    text-decoration-thickness: from-font;
+    text-decoration-skip-ink: none;
+    text-underline-offset: 0.4rem;
 }
