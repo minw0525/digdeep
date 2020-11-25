@@ -71,7 +71,6 @@ function checkUrl(url){
 		console.log(getFilePath(filePath));
 		console.log(currLang);
 
-		pageIdx = 3;
 		console.log(pageIdx);
 
 		(currLang !== "en") ? resolve(paramsObj) : reject();
