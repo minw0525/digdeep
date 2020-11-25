@@ -41,14 +41,14 @@ function checkUrl(url){
 		filePath = window.location.pathname;
 		function getFilePath(path){
 			switch (path) {
-				case "/digdeep/":
+				case "/digdeep/:
 				//case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
 
-				case "/digdeep/project":
-				//case '/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/project' :
+				//case "/digdeep/project":
+				case '/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/project' :
 				pageIdx = 2;
 					console.log(pageIdx);
 					return pageIdx;
@@ -63,10 +63,12 @@ function checkUrl(url){
 
 			}
 		}
-		
+
 		console.log(getParam());
 		console.log(getFilePath(filePath));
 		console.log(currLang);
+
+		pageIdx = 3;
 		console.log(pageIdx);
 
 		(currLang !== "en") ? resolve(paramsObj) : reject();
@@ -172,7 +174,7 @@ function contentDraw(dataSheet){
 
 		//main page
 		function mainDraw(data){
-			gC.attr('style','grid-template-columns: repeat(7, 1fr) 160px 160px');
+			gC.attr('style','grid-template-columns: repeat(7, 1fr) 170px 170px');
 			$('.logo h1').css('grid-column','1/3');
 			$('.nameTag').remove();
 			
@@ -197,6 +199,14 @@ function contentDraw(dataSheet){
 			for(let i = 0; i<28; i++){
 				const item = $('<div></div>');
 				item.attr('class', `item booth diggingDiv ${data[i].query}` );
+
+				//const video = $('<video autoplay muted loop></video>');
+				//const source = $(`<source src='video/thumbnail_jiu.mp4' type='video/mp4'>`)
+				//video.attr('src',`video/thumbnail_${data[i].query}.mp4`)
+				//video.attr('src',`video/thumb_kyuntae_250.mp4`);
+				//video.append(source);
+				//item.append(video);
+
 
 				const wrappingBlock = $('<div></div>');
 				wrappingBlock.attr('class', 'wrappingBlock hidden');
@@ -262,7 +272,7 @@ function contentDraw(dataSheet){
 		}
 		//project page
 		function projectDraw(data){
-			gC.attr('style','grid-template-columns: repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 160px 160px;');
+			gC.attr('style','grid-template-columns: repeat(3, minmax(100px, 1fr)) repeat(5, minmax(0, 1fr)) 170px 170px;');
 			$('.logo h1').css('grid-column','1/2');
 			$('.nameTag').remove();
 
@@ -348,6 +358,119 @@ function contentDraw(dataSheet){
 
 			return data;
 		}
+
+		//credit page
+		function creditDraw(data){
+			gC.attr('style','grid-template-columns: repeat(8, minmax(0, 1fr)) 170px 170px;');
+			$('.logo h1').css('grid-column','1/3');
+			$('.nameTag').remove();
+			
+
+			console.log(data);
+			const selectInfo = $('<div></div>');
+			selectInfo.attr('class', 'selectInfo');
+
+			for(let i = 0; i<2; i++){
+				const div = $('<div></div>');
+				div.attr('class','item');
+				selectInfo.append(div);
+
+				switch (i) {
+					case 0:
+						const touchMe = $('<span></span>');
+						touchMe.attr('class','touchMe');
+						div.addClass('personalInfo');
+						div.append(touchMe);
+						touchMe.html('Touch a name!');
+						break;
+					case 1:
+						div.addClass('personalImg')
+						const shovel = $('<img>');
+						const digging = $('<video autoplay muted loop></video>');
+						//shovel.attr('class','showed');
+						//digging.attr('class','hidden');
+						//shovel.attr('src','image/diggingman.png');
+						//digging.attr('src','video/thumbnail_jiu.mp4');
+
+						for(let j = 0; j<2; j++){
+							switch (j) {
+								case 0:
+									div.append(shovel);
+									break;
+								case 1:
+									div.append(digging);
+									break;	
+														
+							}
+						}
+
+						break;						
+				}
+			}
+
+
+			const teamList = $('<div></div>');
+			teamList.attr('class', 'teamList');
+
+			gC.append(teamList);						
+			gC.append(selectInfo);
+
+			const teams = {'ko' : ['기획', '아트', '웹', 'media'], 'en' : ['planning', 'art', 'web', 'media']}
+			const fillTeam = (team => {
+				function capitalize(string) {
+					return string.charAt(0).toUpperCase() + string.slice(1);
+				}
+
+				for(let i = 0; i<4; i++){
+					const teamDiv = $('<div></div>');
+					teamDiv.attr('class',`item teamBox ${team['en'][i]}`)
+					teamList.append(teamDiv);
+	
+					const teamName = $('<span></span>');
+					teamName.attr('class','teamName');
+					teamName.html(capitalize(team[currLang][i]));
+					teamDiv.append(teamName);
+
+				}
+			});
+			fillTeam(teams)
+
+			const generalInfo = $('<div></div>');
+			generalInfo.attr('class','item generalInfo');
+			teamList.append(generalInfo);
+			for(let i = 0; i<3; i++){
+				const div = $('<div></div>');
+				div.attr('class',`div${i}`)
+				switch (i) {
+					case 0:
+						const title = $('<h2></h2>');
+						title.attr('class','title');
+						title.html('Dig Deep');
+						const lexicon1 = $('<p>1. orem ipsum dolor sit amet consectetur</p>');
+						const lexicon2 = $('<p>2. orem ipsum dolor sit amet consectetur adipisicing </p>');
+						div.append(title, lexicon1, lexicon2);
+						break;
+					case 1:
+						const keynote = $('<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel atque similique reiciendis, optio explicabo fugit voluptatem neque tenetur, aliquam sint rerum perspiciatis accusamus in ipsa inventore maxime vero iste consequatur. Fugit atque ullam commodi nostrum voluptatum natus tenetur! Est modi accusantium voluptatibus laudantium molestiae. </p>');
+						div.append(keynote);
+						break;		
+					case 2:
+						for(let k = 0; k<2; k++){							
+							const wrapper = $('<div></div>');
+							const span1 = $('<span>Jaewon Seok</span>');
+							span1.attr('class','duty');
+							const span2 = $('<span>HIVCD</span>');
+							span2.attr('class','name');
+							wrapper.append(span1, span2);
+							div.append(wrapper);
+						}
+						break;		
+				}
+				generalInfo.append(div);
+
+			}
+			return data;
+		}
 		resolve(dataSheet);
 	})
 }
@@ -405,8 +528,7 @@ function contentFill(data){
 
 			function fillMainTagText(data){
 				const blockTags = Array.prototype.slice.call($('.blockTag'))
-				blockTags.map(e=>{
-					let i = blockTags.indexOf(e);
+				blockTags.map((e,i)=>{
 					const blockContent = [data[i].name, data[i].title];
 					e.childNodes[0].childNodes[0].textContent = blockContent[0];
 					e.childNodes[1].textContent = blockContent[1];
@@ -414,11 +536,10 @@ function contentFill(data){
 			}
 			fillMainInfo(data);
 			fillMainTagText(dataSheet[currLang]);
-			
+
 			//fill video in booth
 			let boothList = Array.prototype.slice.call($('.booth'))
-			boothList.map(v=>{
-				let i = boothList.indexOf(v);
+			boothList.map((v,i)=>{
 				const video = document.createElement('video');
 				Object.assign(video, {
 					autoplay: true,
@@ -431,7 +552,7 @@ function contentFill(data){
 				//const source = $(`<source src='video/thumbnail_${dataSheet[currLang][i].query}.mp4' type='video/mp4'>`)
 				v.prepend(video);
 			})
-		
+
 			return data;
 		}
 
@@ -476,10 +597,10 @@ function contentFill(data){
 						//sticky image fill
 			function stickyImageSet(student){
 				const imgBoxes = Array.prototype.slice.call($('.stick-img'))
-				imgBoxes.map(e=>{
-				let i = imgBoxes.indexOf(e)+1;
-				//e.src = 'image/'+student+i+'.png';
-				e.src = 'image/'+''+i+'.png';
+				imgBoxes.map((e, i)=>{
+					let j = i+1;
+					//e.src = 'image/'+student+i+'.png';
+					e.src = 'image/'+''+j+'.png';
 				})
 			}
 
