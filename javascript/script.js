@@ -44,14 +44,14 @@ function checkUrl(url){
 		filePath = window.location.pathname;
 		function getFilePath(path){
 			switch (path) {
-				case "/digdeep/":
+				case "/digdeep/index.html":
 				//case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
 					return pageIdx;
 
-				case "/digdeep/project":
-				//case '/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/project' :
+				//case "/digdeep/project":
+				case '/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/project' :
 				pageIdx = 2;
 					console.log(pageIdx);
 					return pageIdx;
@@ -71,6 +71,7 @@ function checkUrl(url){
 		console.log(getFilePath(filePath));
 		console.log(currLang);
 
+		pageIdx = 2;
 		console.log(pageIdx);
 
 		(currLang !== "en") ? resolve(paramsObj) : reject();
@@ -315,7 +316,7 @@ function contentDraw(dataSheet){
 			const urlLink = $('<a></a>');
 			urlLink.attr({
 				'target': 'blank',
-				'class': 'url underLine',
+				'class': 'url highlightOn',
 				'data-detect': 'url'
 			})
 			urlBox.append(urlLink);
@@ -428,7 +429,6 @@ function contentDraw(dataSheet){
 					teamDiv.append(teamName);
 
 				}
-				console.debug(data);
 
 				sortedByTeam = [ [], [], [], [],]
 				roleList = { 
@@ -457,7 +457,7 @@ function contentDraw(dataSheet){
 				for(let i = 0; i<roleList[currLang].length; i++){
 					for(let j = 0; j<roleList[currLang][i].length; j++){
 						const dutyDiv = $(`<div></div>`);
-						const duty = $(`<span>${roleList[currLang][i][j]}</span>`)
+						const duty = $(`<span>${capitalize(roleList[currLang][i][j])}</span>`)
 						duty.attr('class','duty');
 						$(`.teamBox${i}`).append(dutyDiv);
 						dutyDiv.append(duty);
@@ -477,21 +477,23 @@ function contentDraw(dataSheet){
 					case 0:
 						const title = $('<h2></h2>');
 						title.attr('class','title');
-						title.html('Dig Deep');
-						const lexicon1 = $('<p>1. orem ipsum dolor sit amet consectetur</p>');
-						const lexicon2 = $('<p>2. orem ipsum dolor sit amet consectetur adipisicing </p>');
+						title.html('Dig deep');
+						const lexicon1 = $('<p></p>');
+						const lexicon2 = $('<p></p>');
 						div.append(title, lexicon1, lexicon2);
 						break;
 					case 1:
-						const keynote = $('<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel atque similique reiciendis, optio explicabo fugit voluptatem neque tenetur, aliquam sint rerum perspiciatis accusamus in ipsa inventore maxime vero iste consequatur. Fugit atque ullam commodi nostrum voluptatum natus tenetur! Est modi accusantium voluptatibus laudantium molestiae. </p>');
-						div.append(keynote);
+						const keynote = $('<p></p>');
+						const last = $('<h2></h2>');
+						last.text('dig deep.');
+						div.append(keynote, last);
 						break;		
 					case 2:
 						for(let k = 0; k<2; k++){							
 							const wrapper = $('<div></div>');
-							const span1 = $('<span>Jaewon Seok</span>');
+							const span1 = $('<span></span>');
 							span1.attr('class','duty');
-							const span2 = $('<span>HIVCD</span>');
+							const span2 = $('<span></span>');
 							span2.attr('class','creditName');
 							wrapper.append(span1, span2);
 							div.append(wrapper);
@@ -623,6 +625,9 @@ function contentFill(data){
 					indexLink.attr('class','spa');
 					$('.index').append(indexLink);
 					indexLink.html('<p>'+data[i].name+'</p>');
+					if(data[i].query === paramsObj.student){
+						indexLink.attr('class', 'highlightOn');
+					}
 				})
 			}
 
@@ -652,19 +657,45 @@ function contentFill(data){
 		
 		//credit page
 		function creditFill(data){
+			function infoFill(){
+				const lexicon1 = $('.generalInfo > .div0 > p:first-of-type');
+				const lexicon2 = $('.generalInfo > .div0 > p:nth-of-type(2)');
+				const keynote = $('.generalInfo > .div1 > p');
+				const adviser = $('.generalInfo > .div2 div:first-child .duty');
+				const professor = $('.generalInfo > .div2 div:first-child .creditName');
+				const sponsor = $('.generalInfo > .div2 div:last-child .duty');
+				const hivcd = $('.generalInfo > .div2 div:last-child .creditName');
+				hivcd.html('HIVCD');
 
+
+				console.log(currLang);
+				switch (currLang){
+					case 'ko':
+					lexicon1.html('1. (무엇을 알아내기 위해) 깊이 파고들다.');					
+					lexicon2.html('2. (장비 따위의) 필요한 것을 찾기 위해 노력하다.');
+					keynote.html('2020년, 준비를 마친 인부들이 이동을 시작했다. 오프라인에서 온라인으로, 전신의 움직임에서 손가락의 작은 움직임으로, 땅 위에서 픽셀 위로…. 수많은 변화 속에서 그들은 존재를 지속할 수 있는 무언가를 찾아 나섰다. 각자가 속한 그리드와 픽셀 위에서, 28명의 인부들은 삽을 들고 더 깊은 아래를 향해 웹 속을 파고든다. 그 끝에 발굴해낸 새로운 가능성과 존재의 조각이 궁금하다면,')
+					adviser.html('지도 교수');
+					professor.html('석재원');
+					sponsor.html('주최');
+					break;
+					case 'en':
+					lexicon1.html('1. search thoroughly for information');
+					lexicon2.html('2. try hard to provide the money, equipment, etc.');
+					keynote.html('In 2020, after extensive preparation, workers began to move. From offline to online, from full-body movement to small finger movements, from the ground to pixels above... Amidst a multitude of changes, they longed to find that “something” (or quality) that will rest immortally. On top of the grid and pixels to which they correspond, twenty-eight members hold a shovel to dig deeper into the web. If you are curious about the new possibilities and pieces unearthed,');
+					adviser.html('Professor');
+					professor.html('Jaewon Seok');
+					sponsor.html('Auspice');
+					break;
+				}
+			}
 			function roleFill(data){
-				console.log(data);
 				//box 순회(팀)
 				for(let i = 0; i<4; i++){
 					// i번째 팀에서 역할별로 채움 데이터 role 값 ===(roleList)인경우 뱉기
 					for(let j = 0; j<roleList[currLang][i].length; j++){
-						console.log(roleList[currLang][i][j])
-						console.log(sortedByTeam[i])
 
 						sortedByTeam[i].forEach(el=>{
 							if(el.role === roleList[currLang][i][j]){
-								console.log(el);
 								const member = $(`<span>${el.name}</span>`)
 								member.attr('class','creditName');
 								if(currLang==='en'){
@@ -761,7 +792,7 @@ function contentFill(data){
 											case 1:
 												const url = $(`<a target="blank"><span>${el.url}</span></a>`);
 												url.attr('href', `https://${el.url}`);
-												url.attr('class','underLine')
+												url.attr('class','highlightOn')
 												wrapper.append(url);
 												break;
 											//3칸
@@ -787,6 +818,7 @@ function contentFill(data){
 					}
 				}
 			}
+			infoFill();
 			roleFill(data);
 
 
