@@ -195,12 +195,14 @@ h2 * {
 }
 .item {
     background-color: white;
-    overflow: auto;
+}
+.item, .jail{
+     overflow: auto;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
-.item::-webkit-scrollbar {
+.item::-webkit-scrollbar, .jail::-webkit-scrollbar {
     display: none;
 }
 
