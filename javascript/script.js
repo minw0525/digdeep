@@ -6,12 +6,15 @@ const paramsObj = {};
 const paramReg = /(\?|&)(\D|\d){1,}/;
 const langPart = /(\?|&)lang=(\D|\d){1,}/;
 const dataSheet = {"ko":[],"en":[]};
+const teams = {'ko' : ['기획', '아트', '웹', '미디어'], 'en' : ['planning', 'art', 'web', 'media']}
+
 let filePath;
 let pageIdx;
 let currLang;
 let url = window.location.href;
 let entry;
-
+let sortedByTeam = [];
+let roleList = {};
 
 function checkUrl(url){
 	const currParam = paramReg.exec(url) ? paramReg.exec(url)[0] : null;
@@ -41,7 +44,7 @@ function checkUrl(url){
 		filePath = window.location.pathname;
 		function getFilePath(path){
 			switch (path) {
-				case '/digdeep/':
+				case "/digdeep/":
 				//case "/Users/minuuuu/Google%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C/%ED%95%99%EA%B5%90/2020-2%20%EC%A1%B8%EC%97%85%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EC%A1%B8%EC%97%85%EC%A0%84%EC%8B%9C%EC%9B%B9%ED%8C%80/digdeep/index.html" :
 					pageIdx = 1;
 					console.log(pageIdx)
@@ -68,6 +71,7 @@ function checkUrl(url){
 		console.log(getFilePath(filePath));
 		console.log(currLang);
 
+		pageIdx = 3;
 		console.log(pageIdx);
 
 		(currLang !== "en") ? resolve(paramsObj) : reject();
@@ -312,7 +316,7 @@ function contentDraw(dataSheet){
 			const urlLink = $('<a></a>');
 			urlLink.attr({
 				'target': 'blank',
-				'class': 'url',
+				'class': 'url underLine',
 				'data-detect': 'url'
 			})
 			urlBox.append(urlLink);
@@ -385,11 +389,9 @@ function contentDraw(dataSheet){
 					case 1:
 						div.addClass('personalImg')
 						const shovel = $('<img>');
+						shovel.attr('src','image/diggingman.png');
 						const digging = $('<video autoplay muted loop></video>');
-						//shovel.attr('class','showed');
-						//digging.attr('class','hidden');
-						//shovel.attr('src','image/diggingman.png');
-						//digging.attr('src','video/thumbnail_jiu.mp4');
+
 
 						for(let j = 0; j<2; j++){
 							switch (j) {
@@ -414,15 +416,11 @@ function contentDraw(dataSheet){
 			gC.append(teamList);						
 			gC.append(selectInfo);
 
-			const teams = {'ko' : ['기획', '아트', '웹', 'media'], 'en' : ['planning', 'art', 'web', 'media']}
 			const fillTeam = (team => {
-				function capitalize(string) {
-					return string.charAt(0).toUpperCase() + string.slice(1);
-				}
 
 				for(let i = 0; i<4; i++){
 					const teamDiv = $('<div></div>');
-					teamDiv.attr('class',`item teamBox ${team['en'][i]}`)
+					teamDiv.attr('class',`item teamBox teamBox${i}`)
 					teamList.append(teamDiv);
 	
 					const teamName = $('<span></span>');
@@ -431,6 +429,42 @@ function contentDraw(dataSheet){
 					teamDiv.append(teamName);
 
 				}
+				console.debug(data);
+
+				sortedByTeam = [ [], [], [], [],]
+				roleList = { 
+					'ko': [['팀장','팀원'],['팀장, 웹 디렉팅','모바일 디렉팅','SNS 디렉팅','이미지 취합'],['팀장','팀원'],['팀장','팀원']],
+					'en': [['leader','member'],['leader, web directing','mobile directing','SNS directing','image collecting'],['leader','member'],['leader','member']]
+				};
+				data.forEach(el => {
+					switch (el.team) {
+						case 'planning':
+							sortedByTeam[0].push(el);
+							break;
+						case 'art':
+							sortedByTeam[1].push(el);
+							break;
+						case 'web':
+							sortedByTeam[2].push(el);
+							break;
+						case 'media':
+							sortedByTeam[3].push(el);
+							break;
+					}						
+				});
+				console.debug(sortedByTeam)
+
+				console.debug(roleList);
+				for(let i = 0; i<roleList[currLang].length; i++){
+					for(let j = 0; j<roleList[currLang][i].length; j++){
+						const dutyDiv = $(`<div></div>`);
+						const duty = $(`<span>${roleList[currLang][i][j]}</span>`)
+						duty.attr('class','duty');
+						$(`.teamBox${i}`).append(dutyDiv);
+						dutyDiv.append(duty);
+					} 
+				}
+				
 			});
 			fillTeam(teams)
 
@@ -459,7 +493,7 @@ function contentDraw(dataSheet){
 							const span1 = $('<span>Jaewon Seok</span>');
 							span1.attr('class','duty');
 							const span2 = $('<span>HIVCD</span>');
-							span2.attr('class','name');
+							span2.attr('class','creditName');
 							wrapper.append(span1, span2);
 							div.append(wrapper);
 						}
@@ -616,8 +650,147 @@ function contentFill(data){
 			return data;
 		}
 
+		
 		//credit page
 		function creditFill(data){
+
+			function roleFill(data){
+				console.log(data);
+				//box 순회(팀)
+				for(let i = 0; i<4; i++){
+					// i번째 팀에서 역할별로 채움 데이터 role 값 ===(roleList)인경우 뱉기
+					for(let j = 0; j<roleList[currLang][i].length; j++){
+						console.log(roleList[currLang][i][j])
+						console.log(sortedByTeam[i])
+
+						sortedByTeam[i].forEach(el=>{
+							if(el.role === roleList[currLang][i][j]){
+								console.log(el);
+								const member = $(`<span>${el.name}</span>`)
+								member.attr('class','creditName');
+								if(currLang==='en'){
+									member.css('flex','1 1 100%');
+								}
+								$(`.teamBox${i} div:nth-of-type(${j+1})`).append(member);
+								
+
+
+								const shovel = $('.personalImg img');
+								const digging = $('.personalImg video');
+
+								//apply onclick event
+								$('body').click(()=>{
+									$('.touchMe ~ span').remove();
+						 			$('.creditName').removeClass('highlightOn');
+									$('.touchMe').css('display', 'block');
+									shovel.css('display','block');
+									digging.css('display','none');
+
+
+								});
+								member.click((e)=>{
+									e.stopPropagation();
+								});
+								member.click(()=>{
+									//digging.attr('src',`video/thumbnail_${el.query}.mp4`);
+									digging.attr('src',`video/thumbnail_jiu.mp4`);
+									digging.css('display','block');
+
+
+									//선택자 하이라이트
+									$('.infoWrapper').remove();
+									$('span').not(this).removeClass('highlightOn');
+									member.toggleClass('highlightOn');
+
+									if(member.hasClass('highlightOn')){
+										$('.touchMe').css('display','none');
+										shovel.css('display','none');
+									}
+
+									
+
+
+
+									//클릭 시 정보
+									const personalInfo = $('.personalInfo');
+
+									//info 칸 채우기
+									for(let k = 0; k<4; k++){
+										//네칸 싸바리
+										const wrapper = $('<span></span>');
+										wrapper.attr('class','infoWrapper');
+										personalInfo.append(wrapper);
+
+										let t;
+										//팀명 한글로,,,
+										switch (el.team) {
+											case 'planning':
+												t = teams[currLang][0];
+												break;
+											case 'art':
+												t = teams[currLang][1];
+												break;
+											case 'web':
+												t = teams[currLang][2];
+												break;
+											case 'media':
+												t = teams[currLang][3];
+												break;
+										
+											default:
+												break;
+										}
+										switch (k) {
+											//첫칸
+											case 0:
+												let koOrEn;
+												if(currLang === 'ko'){koOrEn = '팀'}
+												else{koOrEn = 'team'}
+
+												const team = $(`<span>${capitalize(t)} ${koOrEn}</span>`);
+												if(currLang==='en'){team.css({
+													'width': '100%',
+													'display': 'block'
+												})}
+												wrapper.append(team);
+												const role = $(`<span>${capitalize(el.role)}</span><br>`);
+												const name = $(`<span>${el.name}</span>`);
+												name.attr('class','name');
+												wrapper.append(role, name);
+												break;
+											//2칸
+											case 1:
+												const url = $(`<a target="blank"><span>${el.url}</span></a>`);
+												url.attr('href', `https://${el.url}`);
+												url.attr('class','underLine')
+												wrapper.append(url);
+												break;
+											//3칸
+											case 2:
+												const insta = $(`<span>instagram</span>`);
+												const contact = $(`<span>${el.personalUrl}</span>`);
+												wrapper.append(insta, contact);
+												break;
+											//4칸
+											case 3:
+												const email = $(`<span>e-mail</span>`);
+												const address = $(`<span>${el.email}</span>`);
+												wrapper.append(email, address);
+												break;										
+											default:
+												break;
+										}
+									}
+								})
+
+							}
+						})
+					}
+				}
+			}
+			roleFill(data);
+
+
 			return data;
 		}
 
@@ -750,4 +923,8 @@ function makeMultilingual(){
 	$("body").multilingual([
 		'en', 'num'
 	]);
+}
+
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
 }
